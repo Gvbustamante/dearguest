@@ -5,10 +5,11 @@ export default function InviteCard({ name = "Valentina", date = "15 de noviembre
   return (
     <div className="invite-wrap">
       <div className="invite-card">
-        <span className="invite-tag">Tu invitación digital</span>
+        <div className="wax-seal" aria-hidden="true">
+          <DiamondIcon />
+        </div>
         <div className="invite-top">
           <div className="invite-mono">{initial}</div>
-          <DiamondIcon className="invite-diamond" />
         </div>
         <div className="invite-name">{name}</div>
         <div className="invite-date">{date}</div>

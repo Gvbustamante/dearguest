@@ -13,7 +13,7 @@ export default function Benefits() {
             solo lugar, siempre a mano.
           </p>
         </div>
-        <div className="benefit-grid reveal">
+        <div className="benefit-row reveal">
           {benefits.map((b) => (
             <BenefitCard key={b.title} {...b} />
           ))}
