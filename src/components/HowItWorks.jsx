@@ -6,7 +6,7 @@ export default function HowItWorks() {
       <div className="container">
         <div className="section-head reveal">
           <span className="eyebrow">El proceso</span>
-          <h2>De la idea al QR en 5 pasos</h2>
+          <h2>De la idea al QR en {steps.length} pasos</h2>
           <p>Tú nos cuentas la historia. Nosotras construimos el sitio.</p>
         </div>
         <ol className="steps reveal">

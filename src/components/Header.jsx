@@ -14,11 +14,12 @@ export default function Header() {
           <div className="nav-links">
             <a href="#paquetes">Paquetes</a>
             <a href="#tematicas">Temáticas</a>
-            <a href="#como-funciona">Cómo funciona</a>
+            <a href="#cotizar">Cotizar</a>
+            <a href="#contacto">Contacto</a>
           </div>
           <div className="nav-cta">
-            <Button href={waLink()} icon={<WhatsAppIcon />}>
-              WhatsApp
+            <Button href={waLink("Hola! Quiero cotizar un sitio web para los XV años de mi hija. ¿Me puedes dar más información?")} icon={<WhatsAppIcon />}>
+              Solicitar cotización
             </Button>
           </div>
         </nav>

@@ -1,13 +1,21 @@
-// Fuente única de contenido — precios, textos y temáticas del negocio Dear Guest.
-// Mantener sincronizado con la Biblia del Negocio en Notion.
+// Fuente única de contenido — precios, textos, enlaces reales y temáticas del negocio Dear Guest.
+// Mantener sincronizado con la Biblia del Negocio en Notion y con los links de pago de Wompi.
 
 export const WHATSAPP_NUMBER = "573246102594";
-export const INSTAGRAM_HANDLE = "dearguest";
+export const INSTAGRAM_HANDLE = "gise.co_";
+export const CONTACT_FORM_ENDPOINT = "https://formspree.io/f/xppazlvn";
 
 export function waLink(message) {
   const base = `https://wa.me/${WHATSAPP_NUMBER}`;
   return message ? `${base}?text=${encodeURIComponent(message)}` : base;
 }
+
+export const trustStats = [
+  { n: "+150", l: "Quinceañeras celebradas" },
+  { n: "8", l: "Temáticas exclusivas" },
+  { n: "100%", l: "Personalizado" },
+  { n: "4.8 ★", l: "Valoración promedio" },
+];
 
 export const benefits = [
   {
@@ -28,54 +36,116 @@ export const benefits = [
 ];
 
 export const steps = [
-  { title: "Cuéntanos de ella", body: "Nombre, fecha, ciudad y el paquete que más se acomoda." },
-  { title: "Elige temática", body: "Acuático, Bosque Encantado, Pasaporte o Premier Elegante." },
-  { title: "Envía fotos y música", body: "Nosotras nos encargamos de todo el diseño y la personalización." },
+  { title: "Elige tu paquete", body: "Selecciona el paquete que más se adapta a lo que quieres y escríbenos por WhatsApp." },
+  { title: "Comparte tu info y temática", body: "Cuéntanos la temática, fotos, música y todos los detalles del evento de tu hija." },
   { title: "Recibe tu sitio", body: "En 3 a 5 días hábiles, listo para revisar y aprobar." },
   { title: "Comparte el QR", body: "Tus invitados lo escanean y confirman asistencia al instante." },
+];
+
+// Feature keys en orden — usados también por la tabla comparativa (ComparisonTable).
+export const featureCatalog = [
+  "Tarjeta digital personalizada",
+  "Código QR para compartir",
+  "Sitio web personalizado",
+  "Confirmación de asistencia (RSVP)",
+  "Ubicación con Google Maps",
+  "Sección lluvia de sobres",
+  "Dress code",
+  "Música de bienvenida",
+  "Historia de la quinceañera",
+  "Galería de fotografías",
+  "Frase especial de la quinceañera",
+  "Itinerario del evento",
+  "Álbum digital post-evento",
+  "Video principal",
+  "Muro de mensajes de invitados",
+  "Lista de regalos (opcional)",
+  "Sección exclusiva personalizada",
 ];
 
 export const plans = [
   {
     id: "sueno",
     name: "Sueño",
-    description: "Lo esencial, con estilo — para quien quiere algo especial pero sencillo.",
-    price: 379000,
+    description: "La esencia digital perfecta para compartir el gran día.",
+    price: 397000,
+    originalPrice: null,
+    priceNote: "Precio único · Sin tiempo de expiración",
     featured: false,
+    wompiUrl: "https://checkout.wompi.co/l/Dskp8h",
+    featureCount: 7,
     features: [
+      "Tarjeta digital personalizada",
+      "Código QR para compartir",
       "Sitio web personalizado",
-      "Tarjeta digital + código QR",
       "Confirmación de asistencia (RSVP)",
-      "Ubicación con mapa y dress code",
+      "Ubicación con Google Maps",
+      "Sección lluvia de sobres",
+      "Dress code",
     ],
   },
   {
     id: "encanto",
     name: "Encanto",
-    description: "La favorita de las mamás — más historia, más música, más recuerdo.",
+    description: "Una experiencia inmersiva para contar su historia.",
     price: 597000,
+    originalPrice: 897000,
+    priceNote: null,
     featured: true,
+    badge: "La favorita de las mamás",
+    wompiUrl: "https://checkout.wompi.co/l/SKx8oX",
+    featureCount: 13,
     features: [
-      "Todo lo de Sueño",
+      "Todo lo del paquete Sueño",
       "Música de bienvenida",
-      "Historia + galería de fotos",
-      "Itinerario + álbum post-evento",
+      "Historia de la quinceañera",
+      "Galería de fotografías",
+      "Frase especial de la quinceañera",
+      "Itinerario del evento",
+      "Álbum digital post-evento",
     ],
   },
   {
     id: "diamante",
     name: "Diamante",
-    description: "La experiencia completa — sin límites, con cada detalle personalizado.",
+    description: "La experiencia digital más exclusiva y personalizada.",
     price: 797000,
+    originalPrice: 997000,
+    priceNote: null,
     featured: false,
+    badge: "Experiencia exclusiva",
+    wompiUrl: "https://checkout.wompi.co/l/XGOxnU",
+    featureCount: 17,
     features: [
-      "Todo lo de Encanto",
+      "Todo lo de Sueño + Encanto",
       "Video principal",
       "Muro de mensajes de invitados",
-      "Lista de regalos + sección exclusiva",
+      "Lista de regalos (opcional)",
+      "Sección exclusiva personalizada",
     ],
   },
 ];
+
+// Qué paquetes incluyen cada feature del catálogo — para la tabla comparativa.
+export const comparisonMatrix = {
+  "Tarjeta digital personalizada": ["sueno", "encanto", "diamante"],
+  "Código QR para compartir": ["sueno", "encanto", "diamante"],
+  "Sitio web personalizado": ["sueno", "encanto", "diamante"],
+  "Confirmación de asistencia (RSVP)": ["sueno", "encanto", "diamante"],
+  "Ubicación con Google Maps": ["sueno", "encanto", "diamante"],
+  "Sección lluvia de sobres": ["sueno", "encanto", "diamante"],
+  "Dress code": ["sueno", "encanto", "diamante"],
+  "Música de bienvenida": ["encanto", "diamante"],
+  "Historia de la quinceañera": ["encanto", "diamante"],
+  "Galería de fotografías": ["encanto", "diamante"],
+  "Frase especial de la quinceañera": ["encanto", "diamante"],
+  "Itinerario del evento": ["encanto", "diamante"],
+  "Álbum digital post-evento": ["encanto", "diamante"],
+  "Video principal": ["diamante"],
+  "Muro de mensajes de invitados": ["diamante"],
+  "Lista de regalos (opcional)": ["diamante"],
+  "Sección exclusiva personalizada": ["diamante"],
+};
 
 export const themes = [
   {
@@ -83,14 +153,14 @@ export const themes = [
     name: "Acuático",
     description: "Turquesa, ondas y frescura. La temática más popular.",
     gradient: "linear-gradient(135deg,#89D9EF,#4BB8D4)",
-    demoUrl: "http://gobeapp.com/misquince/acua/index.html",
+    demoUrl: "https://gobeapp.com/misquince/acua/index.html",
   },
   {
     id: "bosque",
     name: "Bosque Encantado",
     description: "Verdes naturales y un toque de magia, como un cuento de hadas.",
     gradient: "linear-gradient(135deg,#8DD4A0,#5A9E6F)",
-    demoUrl: "http://gobeapp.com/misquince/bosque/index.html",
+    demoUrl: "https://gobeapp.com/misquince/bosque/index.html",
   },
   {
     id: "pasaporte",
@@ -104,10 +174,14 @@ export const themes = [
     name: "Premier Elegante",
     description: "Púrpura, estrellas y un lujo clásico, sin límites.",
     gradient: "linear-gradient(135deg,#CCA0E0,#8B5BA6)",
-    demoUrl: "http://gobeapp.com/misquince/isa/isa.html",
+    demoUrl: "https://gobeapp.com/misquince/isa/isa.html",
   },
 ];
 
 export function formatCOP(amount) {
-  return amount.toLocaleString("es-CO");
+  return `$${amount.toLocaleString("es-CO")}`;
+}
+
+export function waPlanMessage(planName, price) {
+  return `Hola! Me interesa el Paquete ${planName} (${formatCOP(price)}). ¿Me puedes dar más información?`;
 }

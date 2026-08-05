@@ -1,4 +1,4 @@
-import { DiamondIcon } from "./icons.jsx";
+import { DiamondIcon, InstagramIcon, WhatsAppIcon } from "./icons.jsx";
 import { INSTAGRAM_HANDLE, waLink } from "../data/content.js";
 
 export default function Footer() {
@@ -19,15 +19,17 @@ export default function Footer() {
               <h4>Explora</h4>
               <a href="#paquetes">Paquetes</a>
               <a href="#tematicas">Temáticas</a>
-              <a href="#como-funciona">Cómo funciona</a>
+              <a href="#cotizar">Cotizar</a>
+              <a href="#contacto">Contacto</a>
             </div>
             <div className="foot-col">
               <h4>Contacto</h4>
-              <a href={waLink()} target="_blank" rel="noopener noreferrer">
-                WhatsApp
+              <a href={waLink("Hola! Vi la página de Dear Guest y me interesa saber más.")} target="_blank" rel="noopener noreferrer">
+                <WhatsAppIcon />
+                +57 324 610 2594
               </a>
               <a href={`https://instagram.com/${INSTAGRAM_HANDLE}`} target="_blank" rel="noopener noreferrer">
-                @{INSTAGRAM_HANDLE}
+                <InstagramIcon />@{INSTAGRAM_HANDLE}
               </a>
             </div>
           </div>

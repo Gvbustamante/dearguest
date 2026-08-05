@@ -1,11 +1,15 @@
 import { useEffect } from "react";
 import Header from "./components/Header.jsx";
 import Hero from "./components/Hero.jsx";
+import TrustBar from "./components/TrustBar.jsx";
 import Benefits from "./components/Benefits.jsx";
 import HowItWorks from "./components/HowItWorks.jsx";
 import Pricing from "./components/Pricing.jsx";
+import ComparisonTable from "./components/ComparisonTable.jsx";
 import Themes from "./components/Themes.jsx";
+import Calculator from "./components/Calculator.jsx";
 import CTASection from "./components/CTASection.jsx";
+import ContactForm from "./components/ContactForm.jsx";
 import Footer from "./components/Footer.jsx";
 
 export default function App() {
@@ -36,15 +40,20 @@ export default function App() {
       <Header />
       <main>
         <Hero />
+        <TrustBar />
         <div className="rule" />
         <Benefits />
         <div className="rule" />
         <HowItWorks />
         <div className="rule" />
         <Pricing />
+        <ComparisonTable />
         <div className="rule" />
         <Themes />
+        <div className="rule" />
+        <Calculator />
         <CTASection />
+        <ContactForm />
       </main>
       <Footer />
     </div>
