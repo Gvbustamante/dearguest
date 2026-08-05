@@ -1327,7 +1327,9 @@ footer {
   font-weight: 600;
 }
 .foot-col a {
-  display: block;
+  display: flex;
+  align-items: center;
+  gap: 0.55em;
   text-decoration: none;
   font-size: 0.9rem;
   opacity: 0.82;
@@ -1336,6 +1338,11 @@ footer {
 .foot-col a:hover {
   color: var(--wine);
   opacity: 1;
+}
+.foot-col a svg {
+  width: 16px;
+  height: 16px;
+  flex: none;
 }
 .foot-bottom {
   display: flex;
