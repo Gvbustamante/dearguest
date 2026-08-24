@@ -1,6 +1,5 @@
 import Button from "./Button.jsx";
-import { DiamondIcon, WhatsAppIcon } from "./icons.jsx";
-import { waLink } from "../data/content.js";
+import { DiamondIcon } from "./icons.jsx";
 
 export default function Header() {
   return (
@@ -18,8 +17,8 @@ export default function Header() {
             <a href="#contacto">Contacto</a>
           </div>
           <div className="nav-cta">
-            <Button href={waLink("Hola! Quiero cotizar un sitio web para los XV años de mi hija. ¿Me puedes dar más información?")} icon={<WhatsAppIcon />}>
-              Solicitar cotización
+            <Button href="#paquetes" external={false}>
+              Ver paquetes
             </Button>
           </div>
         </nav>

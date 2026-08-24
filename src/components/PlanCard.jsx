@@ -1,5 +1,5 @@
-import { CheckIcon, DiamondIcon, WhatsAppIcon } from "./icons.jsx";
-import { formatCOP, waLink, waPlanMessage } from "../data/content.js";
+import { CheckIcon, DiamondIcon } from "./icons.jsx";
+import { formatCOP } from "../data/content.js";
 
 export default function PlanCard({ name, description, price, originalPrice, priceNote, featured, badge, wompiUrl, features }) {
   return (
@@ -36,10 +36,6 @@ export default function PlanCard({ name, description, price, originalPrice, pric
         </ul>
         <a className="btn btn-primary" href={wompiUrl} target="_blank" rel="noopener noreferrer">
           Pagar y reservar
-        </a>
-        <a className="plan-wa" href={waLink(waPlanMessage(name, price))} target="_blank" rel="noopener noreferrer">
-          <WhatsAppIcon />
-          ¿Dudas? Escríbenos por WhatsApp
         </a>
       </div>
     </div>

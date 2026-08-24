@@ -1,6 +1,6 @@
 import { useState } from "react";
-import { CardIcon, CheckIcon, WhatsAppIcon } from "./icons.jsx";
-import { formatCOP, plans, waLink, waPlanMessage } from "../data/content.js";
+import { CardIcon, CheckIcon } from "./icons.jsx";
+import { formatCOP, plans } from "../data/content.js";
 
 const DEFAULT_INDEX = 1; // Encanto, igual que en el sitio original
 
@@ -60,10 +60,6 @@ export default function Calculator() {
             <a className="btn btn-primary" href={selected.wompiUrl} target="_blank" rel="noopener noreferrer">
               <CardIcon />
               Pagar ahora
-            </a>
-            <a className="calc-wa" href={waLink(waPlanMessage(selected.name, selected.price))} target="_blank" rel="noopener noreferrer">
-              <WhatsAppIcon />
-              ¿Dudas? Escríbenos por WhatsApp
             </a>
           </div>
         </div>

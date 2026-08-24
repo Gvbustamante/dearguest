@@ -770,33 +770,6 @@ section {
 .plan.featured .btn-primary:hover {
   background: var(--paper-soft);
 }
-.plan-wa {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.5em;
-  margin-top: 0.9em;
-  font-size: 0.8rem;
-  font-weight: 500;
-  opacity: 0.7;
-  text-decoration: none;
-  transition: opacity 0.2s;
-}
-.plan-wa:hover {
-  opacity: 1;
-  color: var(--wine);
-}
-.plan.featured .plan-wa {
-  opacity: 0.8;
-}
-.plan.featured .plan-wa:hover {
-  opacity: 1;
-}
-.plan-wa svg {
-  width: 16px;
-  height: 16px;
-  flex: none;
-}
 
 /* ---------- Trust bar ---------- */
 .trust {
@@ -1067,23 +1040,6 @@ section {
   width: 100%;
   justify-content: center;
 }
-.calc-wa {
-  display: flex;
-  align-items: center;
-  gap: 0.5em;
-  font-size: 0.82rem;
-  opacity: 0.7;
-  text-decoration: none;
-  padding: 0.4em;
-}
-.calc-wa:hover {
-  opacity: 1;
-  color: var(--wine);
-}
-.calc-wa svg {
-  width: 16px;
-  height: 16px;
-}
 
 /* ---------- Formulario de contacto ---------- */
 .contact-card {
@@ -1209,8 +1165,25 @@ section {
     z-index: 5 !important;
   }
 }
+.theme-swatch-wrap {
+  position: relative;
+}
 .theme-swatch {
   height: 92px;
+  width: 100%;
+  object-fit: cover;
+}
+.theme-badge {
+  position: absolute;
+  top: 0.5rem;
+  left: 0.5rem;
+  background: var(--wine);
+  color: var(--paper);
+  font-size: 0.62rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  padding: 0.2rem 0.65rem;
+  border-radius: 100px;
 }
 .theme-body {
   padding: 1.3rem 1.3rem 1.5rem;
@@ -1352,6 +1325,39 @@ footer {
   padding-top: 1.6rem;
   font-size: 0.8rem;
   opacity: 0.6;
+}
+
+/* ---------- WhatsApp flotante ---------- */
+.wa-float {
+  position: fixed;
+  right: 20px;
+  bottom: 20px;
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: #25d366;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 10px 26px -8px rgba(0, 0, 0, 0.45);
+  z-index: 50;
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+.wa-float:hover {
+  transform: translateY(-3px) scale(1.05);
+  box-shadow: 0 14px 30px -8px rgba(0, 0, 0, 0.5);
+}
+.wa-float svg {
+  width: 28px;
+  height: 28px;
+}
+@media (prefers-reduced-motion: reduce) {
+  .wa-float:hover {
+    transform: none;
+  }
 }
 
 .reveal {

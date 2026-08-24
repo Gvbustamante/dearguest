@@ -1,5 +1,5 @@
-import { DiamondIcon, InstagramIcon, WhatsAppIcon } from "./icons.jsx";
-import { INSTAGRAM_HANDLE, waLink } from "../data/content.js";
+import { DiamondIcon, InstagramIcon } from "./icons.jsx";
+import { INSTAGRAM_HANDLE } from "../data/content.js";
 
 export default function Footer() {
   const year = new Date().getFullYear();
@@ -24,10 +24,7 @@ export default function Footer() {
             </div>
             <div className="foot-col">
               <h4>Contacto</h4>
-              <a href={waLink("Hola! Vi la página de Dear Guest y me interesa saber más.")} target="_blank" rel="noopener noreferrer">
-                <WhatsAppIcon />
-                +57 324 610 2594
-              </a>
+              <a href="#contacto">Formulario de contacto</a>
               <a href={`https://instagram.com/${INSTAGRAM_HANDLE}`} target="_blank" rel="noopener noreferrer">
                 <InstagramIcon />@{INSTAGRAM_HANDLE}
               </a>

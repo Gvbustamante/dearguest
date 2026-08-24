@@ -11,6 +11,7 @@ import Calculator from "./components/Calculator.jsx";
 import CTASection from "./components/CTASection.jsx";
 import ContactForm from "./components/ContactForm.jsx";
 import Footer from "./components/Footer.jsx";
+import FloatingWhatsApp from "./components/FloatingWhatsApp.jsx";
 
 export default function App() {
   // Revela las secciones con .reveal a medida que entran en pantalla.
@@ -56,6 +57,7 @@ export default function App() {
         <ContactForm />
       </main>
       <Footer />
+      <FloatingWhatsApp />
     </div>
   );
 }

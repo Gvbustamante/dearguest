@@ -36,7 +36,7 @@ export const benefits = [
 ];
 
 export const steps = [
-  { title: "Elige tu paquete", body: "Selecciona el paquete que más se adapta a lo que quieres y escríbenos por WhatsApp." },
+  { title: "Elige tu paquete", body: "Selecciona el paquete que más se adapta a lo que quieres y págalo en línea." },
   { title: "Comparte tu info y temática", body: "Cuéntanos la temática, fotos, música y todos los detalles del evento de tu hija." },
   { title: "Recibe tu sitio", body: "En 3 a 5 días hábiles, listo para revisar y aprobar." },
   { title: "Comparte el QR", body: "Tus invitados lo escanean y confirman asistencia al instante." },
@@ -152,36 +152,33 @@ export const themes = [
     id: "acuatico",
     name: "Acuático",
     description: "Turquesa, ondas y frescura. La temática más popular.",
-    gradient: "linear-gradient(135deg,#89D9EF,#4BB8D4)",
+    image: "/thumbnails/acuatico.jpg",
+    badge: "Más popular",
     demoUrl: "https://gobeapp.com/misquince/acua/index.html",
   },
   {
     id: "bosque",
     name: "Bosque Encantado",
     description: "Verdes naturales y un toque de magia, como un cuento de hadas.",
-    gradient: "linear-gradient(135deg,#8DD4A0,#5A9E6F)",
+    image: "/thumbnails/bosque.jpg",
     demoUrl: "https://gobeapp.com/misquince/bosque/index.html",
   },
   {
     id: "pasaporte",
     name: "Pasaporte / Viaje",
     description: "Tonos cálidos y espíritu de aventura para la quinceañera trotamundos.",
-    gradient: "linear-gradient(135deg,#F0BC8A,#C47A45)",
+    image: "/thumbnails/pasaporte.jpg",
     demoUrl: "http://www.pasaporteamis15.com",
   },
   {
     id: "premier",
     name: "Premier Elegante",
     description: "Púrpura, estrellas y un lujo clásico, sin límites.",
-    gradient: "linear-gradient(135deg,#CCA0E0,#8B5BA6)",
+    image: "/thumbnails/premier.jpg",
     demoUrl: "https://gobeapp.com/misquince/isa/isa.html",
   },
 ];
 
 export function formatCOP(amount) {
   return `$${amount.toLocaleString("es-CO")}`;
-}
-
-export function waPlanMessage(planName, price) {
-  return `Hola! Me interesa el Paquete ${planName} (${formatCOP(price)}). ¿Me puedes dar más información?`;
 }
