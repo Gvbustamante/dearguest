@@ -1,7 +1,5 @@
 import Button from "./Button.jsx";
 import InviteCard from "./InviteCard.jsx";
-import { WhatsAppIcon } from "./icons.jsx";
-import { waLink } from "../data/content.js";
 
 export default function Hero() {
   return (
@@ -19,9 +17,7 @@ export default function Hero() {
             cada invitado lleva en su celular. No se pierde, no se daña. Queda para siempre.
           </p>
           <div className="hero-actions">
-            <Button href={waLink()} icon={<WhatsAppIcon />}>
-              Escríbenos por WhatsApp
-            </Button>
+            <Button to="/cotizar">Cotiza tu sitio →</Button>
             <Button href="#paquetes" variant="ghost" external={false}>
               Ver paquetes y precios
             </Button>

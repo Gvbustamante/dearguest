@@ -28,7 +28,15 @@ export default function PlanCard({ name, description, price, featured, features 
             </li>
           ))}
         </ul>
-        <Button href={waLink(`Hola! Quiero el paquete ${name}`)}>Elegir {name}</Button>
+        <Button to={`/cotizar?paquete=${encodeURIComponent(name)}`}>Elegir {name}</Button>
+        <a
+          href={waLink(`Hola! Quiero el paquete ${name}`)}
+          target="_blank"
+          rel="noopener noreferrer"
+          style={{ display: "block", textAlign: "center", fontSize: ".78rem", color: "var(--ink-soft)", marginTop: 12, textDecoration: "none" }}
+        >
+          ¿Dudas? Escríbenos por WhatsApp
+        </a>
       </div>
     </div>
   );

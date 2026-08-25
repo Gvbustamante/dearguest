@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import { DiamondIcon } from "./icons.jsx";
 import { INSTAGRAM_HANDLE, waLink } from "../data/content.js";
 
@@ -29,11 +30,17 @@ export default function Footer() {
               <a href={`https://instagram.com/${INSTAGRAM_HANDLE}`} target="_blank" rel="noopener noreferrer">
                 @{INSTAGRAM_HANDLE}
               </a>
+              <Link to="/aliados">Programa de alianzas</Link>
             </div>
           </div>
         </div>
         <div className="foot-bottom">
-          <span>© {year} Dear Guest — Barranquilla, Colombia</span>
+          <span>
+            <Link to="/admin" aria-hidden="true" tabIndex={-1} style={{ color: "inherit", textDecoration: "none" }}>
+              ©
+            </Link>{" "}
+            {year} Dear Guest — Barranquilla, Colombia
+          </span>
           <span>Haz que tus 15 brillen desde el primer clic.</span>
         </div>
       </div>
