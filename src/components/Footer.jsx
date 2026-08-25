@@ -1,5 +1,5 @@
 import { DiamondIcon, InstagramIcon } from "./icons.jsx";
-import { INSTAGRAM_HANDLE } from "../data/content.js";
+import { ADMIN_URL, ALLIES_URL, INSTAGRAM_HANDLE } from "../data/content.js";
 
 export default function Footer() {
   const year = new Date().getFullYear();
@@ -28,11 +28,21 @@ export default function Footer() {
               <a href={`https://instagram.com/${INSTAGRAM_HANDLE}`} target="_blank" rel="noopener noreferrer">
                 <InstagramIcon />@{INSTAGRAM_HANDLE}
               </a>
+              {ALLIES_URL && (
+                <a href={ALLIES_URL} target="_blank" rel="noopener noreferrer">
+                  Programa de Alianzas
+                </a>
+              )}
             </div>
           </div>
         </div>
         <div className="foot-bottom">
-          <span>© {year} Dear Guest — Barranquilla, Colombia</span>
+          <span>
+            <a href={ADMIN_URL} aria-hidden="true" tabIndex={-1} className="foot-admin-link">
+              ©
+            </a>{" "}
+            {year} Dear Guest — Barranquilla, Colombia
+          </span>
           <span>Haz que tus 15 brillen desde el primer clic.</span>
         </div>
       </div>
