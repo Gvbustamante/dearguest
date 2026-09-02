@@ -19,23 +19,22 @@ const path = window.location.pathname;
 // defecto vigente.
 const defaultLang = import.meta.env.VITE_DEFAULT_LANG === "en" ? "en" : "es";
 
+// "/en/..." y "/es/..." siempre fuerzan idioma, sin importar la plataforma.
+// Sin prefijo, se usa el idioma por defecto de la plataforma (ver arriba).
+const langPrefixMatch = path.match(/^\/(en|es)(\/|$)/);
+const lang = langPrefixMatch ? langPrefixMatch[1] : defaultLang;
+const rest = langPrefixMatch ? path.slice(langPrefixMatch[0].length - (langPrefixMatch[2] === "/" ? 1 : 0)) : path;
+
 const page = path.startsWith("/admin")
   ? "admin"
-  : path.startsWith("/alianzas")
+  : rest.startsWith("/alianzas")
     ? "alianzas"
-    : path.startsWith("/en")
-      ? "home-en"
-      : path.startsWith("/es")
-        ? "home-es"
-        : defaultLang === "en"
-          ? "home-en"
-          : "home-es";
+    : "home";
 
 const routes = {
   admin: <AdminApp />,
-  alianzas: <AlliesPage />,
-  "home-es": <App lang="es" />,
-  "home-en": <App lang="en" />,
+  alianzas: <AlliesPage lang={lang} />,
+  home: <App lang={lang} />,
 };
 
 createRoot(document.getElementById("root")).render(<StrictMode>{routes[page]}</StrictMode>);

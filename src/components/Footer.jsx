@@ -1,5 +1,5 @@
 import { DiamondIcon, InstagramIcon } from "./icons.jsx";
-import { ADMIN_URL, ALLIES_URL, INSTAGRAM_HANDLE } from "../data/content.js";
+import { ADMIN_URL, INSTAGRAM_HANDLE } from "../data/content.js";
 
 const COPY = {
   es: {
@@ -59,7 +59,7 @@ export default function Footer({ lang = "es" }) {
               <a href={`https://instagram.com/${INSTAGRAM_HANDLE}`} target="_blank" rel="noopener noreferrer">
                 <InstagramIcon />@{INSTAGRAM_HANDLE}
               </a>
-              <a href={ALLIES_URL}>{t.allies}</a>
+              <a href={`${base}/alianzas`}>{t.allies}</a>
             </div>
           </div>
         </div>

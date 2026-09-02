@@ -5,8 +5,6 @@ export const WHATSAPP_NUMBER = "573246102594";
 export const INSTAGRAM_HANDLE = "gise.co_";
 export const CONTACT_FORM_ENDPOINT = "https://formspree.io/f/xppazlvn";
 export const ADMIN_URL = "/admin";
-// Página propia del Programa de Alianzas, dentro de este mismo proyecto.
-export const ALLIES_URL = "/alianzas";
 
 export function waLink(message) {
   const base = `https://wa.me/${WHATSAPP_NUMBER}`;
@@ -344,40 +342,61 @@ export function waWeddingQuoteMessage({ plan, extras, guests, total, currency = 
 // ---------- Programa de Alianzas (/alianzas) ----------
 
 export const alliesAudience = [
-  "Wedding & event planners",
-  "Fotógrafos y videógrafos",
-  "Decoradores y salones de eventos",
-  "Maquilladoras y estilistas",
+  { es: "Wedding & event planners", en: "Wedding & event planners" },
+  { es: "Fotógrafos y videógrafos", en: "Photographers & videographers" },
+  { es: "Decoradores y salones de eventos", en: "Decorators & event venues" },
+  { es: "Maquilladoras y estilistas", en: "Makeup artists & stylists" },
 ];
 
 export const alliesBenefits = [
   {
     title: "Comisión por cada referido",
+    titleEn: "Commission on every referral",
     body: "Ganas un porcentaje por cada quinceañera que llegue a Dear Guest gracias a tu recomendación.",
+    bodyEn: "You earn a percentage for every quinceañera who joins Dear Guest through your recommendation.",
     icon: "heart",
   },
   {
     title: "Tu marca junto a la nuestra",
+    titleEn: "Your brand alongside ours",
     body: "Material de marketing listo para compartir y menciones cruzadas con tus clientes potenciales.",
+    bodyEn: "Ready-to-share marketing material and cross-promotion with your potential clients.",
     icon: "phone",
   },
   {
     title: "Soporte prioritario",
+    titleEn: "Priority support",
     body: "Línea directa con nuestro equipo para resolver dudas y agilizar cada proyecto que refieras.",
+    bodyEn: "A direct line to our team to solve doubts and speed up every project you refer.",
     icon: "clock",
   },
 ];
 
 export const alliesSteps = [
-  { title: "Postúlate", body: "Cuéntanos sobre tu negocio y cómo trabajas con familias de quinceañeras." },
-  { title: "Te contactamos", body: "En menos de 48 horas revisamos tu postulación y coordinamos una llamada." },
-  { title: "Empieza a referir", body: "Comparte Dear Guest con tus clientes y gana por cada uno que se una." },
+  {
+    title: "Postúlate",
+    titleEn: "Apply",
+    body: "Cuéntanos sobre tu negocio y cómo trabajas con familias de quinceañeras.",
+    bodyEn: "Tell us about your business and how you work with quinceañera families.",
+  },
+  {
+    title: "Te contactamos",
+    titleEn: "We reach out",
+    body: "En menos de 48 horas revisamos tu postulación y coordinamos una llamada.",
+    bodyEn: "Within 48 hours we review your application and set up a call.",
+  },
+  {
+    title: "Empieza a referir",
+    titleEn: "Start referring",
+    body: "Comparte Dear Guest con tus clientes y gana por cada uno que se una.",
+    bodyEn: "Share Dear Guest with your clients and earn for every one who joins.",
+  },
 ];
 
 export const alliesBusinessTypes = [
-  "Wedding & event planner",
-  "Fotografía / video",
-  "Decoración y salones de eventos",
-  "Maquillaje y estilismo",
-  "Otro",
+  { es: "Wedding & event planner", en: "Wedding & event planner" },
+  { es: "Fotografía / video", en: "Photography / video" },
+  { es: "Decoración y salones de eventos", en: "Decoration & event venues" },
+  { es: "Maquillaje y estilismo", en: "Makeup & styling" },
+  { es: "Otro", en: "Other" },
 ];
