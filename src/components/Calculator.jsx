@@ -1,10 +1,12 @@
 import { useState } from "react";
 import { CardIcon, CheckIcon } from "./icons.jsx";
-import { formatCOP, plans } from "../data/content.js";
+import { formatCOP } from "../data/content.js";
+import { usePlans } from "../hooks/usePlans.js";
 
 const DEFAULT_INDEX = 1; // Encanto, igual que en el sitio original
 
 export default function Calculator() {
+  const plans = usePlans();
   const [selectedId, setSelectedId] = useState(plans[DEFAULT_INDEX].id);
   const selected = plans.find((p) => p.id === selectedId) ?? plans[DEFAULT_INDEX];
   const savings = selected.originalPrice ? selected.originalPrice - selected.price : 0;
@@ -39,7 +41,7 @@ export default function Calculator() {
                       {plan.name}
                       {plan.featured ? " — Más popular" : ""}
                     </span>
-                    <span className="calc-opt-desc">{plan.featureCount} funcionalidades</span>
+                    <span className="calc-opt-desc">{plan.features.length} funcionalidades</span>
                   </span>
                   <span className="calc-opt-price">
                     {plan.originalPrice && <span className="calc-opt-orig">{formatCOP(plan.originalPrice)}</span>}

@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { CONTACT_FORM_ENDPOINT } from "../data/content.js";
+import { supabase } from "../lib/supabase.js";
 
 const STATUS = { IDLE: "idle", SENDING: "sending", OK: "ok", ERROR: "error" };
 
@@ -10,10 +11,24 @@ export default function ContactForm() {
     event.preventDefault();
     setStatus(STATUS.SENDING);
     const form = event.target;
+    const data = new FormData(form);
+
+    // Guarda una copia en Supabase para que el panel /admin la muestre.
+    // Falla en silencio: nunca debe bloquear el envío por Formspree.
+    supabase
+      .from("contact_messages")
+      .insert({
+        nombre: data.get("nombre"),
+        contacto: data.get("contacto"),
+        tipo_consulta: data.get("tipo_consulta"),
+        mensaje: data.get("mensaje"),
+      })
+      .then(() => {});
+
     try {
       const response = await fetch(CONTACT_FORM_ENDPOINT, {
         method: "POST",
-        body: new FormData(form),
+        body: data,
         headers: { Accept: "application/json" },
       });
       if (response.ok) {

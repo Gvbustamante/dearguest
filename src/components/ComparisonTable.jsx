@@ -1,7 +1,9 @@
 import { CheckIcon, XIcon } from "./icons.jsx";
-import { comparisonMatrix, featureCatalog, formatCOP, plans } from "../data/content.js";
+import { comparisonMatrix, featureCatalog, formatCOP } from "../data/content.js";
+import { usePlans } from "../hooks/usePlans.js";
 
 export default function ComparisonTable() {
+  const plans = usePlans();
   return (
     <section id="comparar">
       <div className="container">

@@ -4,7 +4,7 @@
 export const WHATSAPP_NUMBER = "573246102594";
 export const INSTAGRAM_HANDLE = "gise.co_";
 export const CONTACT_FORM_ENDPOINT = "https://formspree.io/f/xppazlvn";
-export const ADMIN_URL = "https://dearguest.vercel.app/admin";
+export const ADMIN_URL = "/admin";
 // Pendiente: URL del Programa de Alianzas/Aliados — avisar a Gise para completarla.
 export const ALLIES_URL = null;
 

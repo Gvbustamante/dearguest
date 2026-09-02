@@ -1,7 +1,8 @@
 import PlanCard from "./PlanCard.jsx";
-import { plans } from "../data/content.js";
+import { usePlans } from "../hooks/usePlans.js";
 
 export default function Pricing() {
+  const plans = usePlans();
   return (
     <section id="paquetes" className="paquetes-section">
       <div className="container">
