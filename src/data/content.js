@@ -5,8 +5,8 @@ export const WHATSAPP_NUMBER = "573246102594";
 export const INSTAGRAM_HANDLE = "gise.co_";
 export const CONTACT_FORM_ENDPOINT = "https://formspree.io/f/xppazlvn";
 export const ADMIN_URL = "/admin";
-// Pendiente: URL del Programa de Alianzas/Aliados — avisar a Gise para completarla.
-export const ALLIES_URL = null;
+// Página propia del Programa de Alianzas, dentro de este mismo proyecto.
+export const ALLIES_URL = "/alianzas";
 
 export function waLink(message) {
   const base = `https://wa.me/${WHATSAPP_NUMBER}`;
@@ -185,3 +185,44 @@ export const themes = [
 export function formatCOP(amount) {
   return `$${amount.toLocaleString("es-CO")}`;
 }
+
+// ---------- Programa de Alianzas (/alianzas) ----------
+
+export const alliesAudience = [
+  "Wedding & event planners",
+  "Fotógrafos y videógrafos",
+  "Decoradores y salones de eventos",
+  "Maquilladoras y estilistas",
+];
+
+export const alliesBenefits = [
+  {
+    title: "Comisión por cada referido",
+    body: "Ganas un porcentaje por cada quinceañera que llegue a Dear Guest gracias a tu recomendación.",
+    icon: "heart",
+  },
+  {
+    title: "Tu marca junto a la nuestra",
+    body: "Material de marketing listo para compartir y menciones cruzadas con tus clientes potenciales.",
+    icon: "phone",
+  },
+  {
+    title: "Soporte prioritario",
+    body: "Línea directa con nuestro equipo para resolver dudas y agilizar cada proyecto que refieras.",
+    icon: "clock",
+  },
+];
+
+export const alliesSteps = [
+  { title: "Postúlate", body: "Cuéntanos sobre tu negocio y cómo trabajas con familias de quinceañeras." },
+  { title: "Te contactamos", body: "En menos de 48 horas revisamos tu postulación y coordinamos una llamada." },
+  { title: "Empieza a referir", body: "Comparte Dear Guest con tus clientes y gana por cada uno que se una." },
+];
+
+export const alliesBusinessTypes = [
+  "Wedding & event planner",
+  "Fotografía / video",
+  "Decoración y salones de eventos",
+  "Maquillaje y estilismo",
+  "Otro",
+];

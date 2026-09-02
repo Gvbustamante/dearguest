@@ -8,7 +8,7 @@ export default function Footer() {
       <div className="container">
         <div className="foot-grid">
           <div className="foot-brand">
-            <a className="brand" href="#top">
+            <a className="brand" href="/">
               <DiamondIcon className="brand-mark" />
               <span className="brand-name">Dear Guest</span>
             </a>
@@ -17,22 +17,18 @@ export default function Footer() {
           <div className="foot-links">
             <div className="foot-col">
               <h4>Explora</h4>
-              <a href="#paquetes">Paquetes</a>
-              <a href="#tematicas">Temáticas</a>
-              <a href="#cotizar">Cotizar</a>
-              <a href="#contacto">Contacto</a>
+              <a href="/#paquetes">Paquetes</a>
+              <a href="/#tematicas">Temáticas</a>
+              <a href="/#cotizar">Cotizar</a>
+              <a href="/#contacto">Contacto</a>
             </div>
             <div className="foot-col">
               <h4>Contacto</h4>
-              <a href="#contacto">Formulario de contacto</a>
+              <a href="/#contacto">Formulario de contacto</a>
               <a href={`https://instagram.com/${INSTAGRAM_HANDLE}`} target="_blank" rel="noopener noreferrer">
                 <InstagramIcon />@{INSTAGRAM_HANDLE}
               </a>
-              {ALLIES_URL && (
-                <a href={ALLIES_URL} target="_blank" rel="noopener noreferrer">
-                  Programa de Alianzas
-                </a>
-              )}
+              <a href={ALLIES_URL}>Programa de Alianzas</a>
             </div>
           </div>
         </div>
