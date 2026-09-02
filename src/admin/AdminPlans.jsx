@@ -61,6 +61,10 @@ export default function AdminPlans() {
           ))}
         </div>
       </div>
+      <p className="admin-viewing">
+        Estás viendo: <strong>{CATEGORIES.find((c) => c.id === category)?.label}</strong> — {inCategory.length} paquete
+        {inCategory.length === 1 ? "" : "s"} (COP y USD). Elige otra categoría arriba para ver esos paquetes.
+      </p>
       <p className="admin-hint">
         Los cambios se reflejan en el sitio público al guardar. Solo los paquetes de Quinceañeras en COP tienen enlace de
         pago Wompi por ahora — en los demás, deja el link vacío y el botón del sitio lleva directo a tu WhatsApp mientras
@@ -76,6 +80,9 @@ export default function AdminPlans() {
             <div className="admin-plans-grid">
               {items.map((plan) => (
                 <div className="admin-plan-card" key={plan.id}>
+                  <span className="admin-plan-tag">
+                    {CATEGORIES.find((c) => c.id === plan.category)?.label} · {plan.currency.toUpperCase()}
+                  </span>
                   <div className="cf-field">
                     <label>Nombre</label>
                     <input value={plan.name} onChange={(e) => updateField(plan.id, "name", e.target.value)} />
