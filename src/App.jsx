@@ -1,4 +1,5 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
+import { useRevealOnScroll } from "./hooks/useRevealOnScroll.js";
 import Header from "./components/Header.jsx";
 import Hero from "./components/Hero.jsx";
 import TrustBar from "./components/TrustBar.jsx";
@@ -29,26 +30,7 @@ export default function App({ lang = "es" }) {
   // Revela las secciones con .reveal a medida que entran en pantalla.
   // Se vuelve a ejecutar al cambiar de modo o al llegar secciones personalizadas
   // (nuevos nodos .reveal que aún no fueron observados).
-  useEffect(() => {
-    const els = document.querySelectorAll(".reveal");
-    if (!("IntersectionObserver" in window)) {
-      els.forEach((el) => el.classList.add("in"));
-      return undefined;
-    }
-    const io = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add("in");
-            io.unobserve(entry.target);
-          }
-        });
-      },
-      { threshold: 0.15 }
-    );
-    els.forEach((el) => io.observe(el));
-    return () => io.disconnect();
-  }, [mode, customSections.length]);
+  useRevealOnScroll([mode, customSections.length]);
 
   return (
     <div id="top">

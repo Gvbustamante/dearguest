@@ -12,6 +12,7 @@ import {
 } from "../data/content.js";
 import { supabase } from "../lib/supabase.js";
 import { slugifyReferralCode } from "../lib/referral.js";
+import { useRevealOnScroll } from "../hooks/useRevealOnScroll.js";
 
 const STATUS = { IDLE: "idle", SENDING: "sending", OK: "ok", ERROR: "error" };
 
@@ -212,6 +213,7 @@ function AlliesForm({ lang }) {
 
 export default function AlliesPage({ lang = "es" }) {
   const t = COPY[lang] ?? COPY.es;
+  useRevealOnScroll([lang]);
   return (
     <div>
       <AlliesHeader lang={lang} />
