@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import Header from "./components/Header.jsx";
 import Hero from "./components/Hero.jsx";
 import TrustBar from "./components/TrustBar.jsx";
@@ -8,13 +8,20 @@ import Pricing from "./components/Pricing.jsx";
 import ComparisonTable from "./components/ComparisonTable.jsx";
 import Themes from "./components/Themes.jsx";
 import Calculator from "./components/Calculator.jsx";
+import WeddingPricing from "./components/WeddingPricing.jsx";
+import WeddingQuoteCalculator from "./components/WeddingQuoteCalculator.jsx";
 import CTASection from "./components/CTASection.jsx";
 import ContactForm from "./components/ContactForm.jsx";
 import Footer from "./components/Footer.jsx";
 import FloatingWhatsApp from "./components/FloatingWhatsApp.jsx";
 
 export default function App() {
+  const [mode, setMode] = useState("quince");
+  const isBodas = mode === "bodas";
+
   // Revela las secciones con .reveal a medida que entran en pantalla.
+  // Se vuelve a ejecutar al cambiar de modo porque el contenido de las
+  // secciones se reemplaza (nuevos nodos .reveal que aún no fueron observados).
   useEffect(() => {
     const els = document.querySelectorAll(".reveal");
     if (!("IntersectionObserver" in window)) {
@@ -34,26 +41,32 @@ export default function App() {
     );
     els.forEach((el) => io.observe(el));
     return () => io.disconnect();
-  }, []);
+  }, [mode]);
 
   return (
     <div id="top">
-      <Header />
+      <Header mode={mode} onModeChange={setMode} />
       <main>
-        <Hero />
-        <TrustBar />
+        <Hero mode={mode} />
+        {!isBodas && <TrustBar />}
         <div className="rule" />
-        <Benefits />
+        <Benefits mode={mode} />
         <div className="rule" />
-        <HowItWorks />
+        <HowItWorks mode={mode} />
         <div className="rule" />
-        <Pricing />
-        <ComparisonTable />
+        {isBodas ? (
+          <WeddingPricing />
+        ) : (
+          <>
+            <Pricing />
+            <ComparisonTable />
+            <div className="rule" />
+            <Themes />
+          </>
+        )}
         <div className="rule" />
-        <Themes />
-        <div className="rule" />
-        <Calculator />
-        <CTASection />
+        {isBodas ? <WeddingQuoteCalculator /> : <Calculator />}
+        <CTASection mode={mode} />
         <ContactForm />
       </main>
       <Footer />

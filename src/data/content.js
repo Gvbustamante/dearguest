@@ -186,6 +186,118 @@ export function formatCOP(amount) {
   return `$${amount.toLocaleString("es-CO")}`;
 }
 
+// ---------- Modo Bodas (toggle en la home) ----------
+// Precios reales tomados de la propuesta comercial de bodas.
+// Sin enlaces de pago Wompi todavía: el CTA es cotizar por WhatsApp.
+
+export const weddingBenefits = [
+  {
+    title: "La emoción de recibir",
+    body: "Una invitación que llega al celular y detiene el tiempo. Elegante, personalizada, inesperada.",
+    icon: "heart",
+  },
+  {
+    title: "La tranquilidad de organizar",
+    body: "RSVP inteligente, sin grupos de WhatsApp caóticos. Sabes exactamente quién viene.",
+    icon: "phone",
+  },
+  {
+    title: "La ilusión de la espera",
+    body: "Cuenta regresiva en tiempo real. Cada día que pasa, la emoción crece para todos.",
+    icon: "clock",
+  },
+  {
+    title: "El recuerdo permanente",
+    body: "Tu sitio queda activo para siempre. El recuerdo digital que no se borra.",
+    icon: "diamond",
+  },
+];
+
+export const weddingSteps = [
+  { title: "Eliges tu experiencia", body: "Seleccionas el plan que mejor se adapta a tu boda y presupuesto." },
+  { title: "Compartes los detalles", body: "Nos envías colores, fotos, música favorita, historia de amor y datos del evento." },
+  { title: "Diseñamos juntos", body: "Tu experiencia lista en 5 días hábiles con una ronda de ajustes incluida." },
+  { title: "Apruebas y lanzas", body: "Recibes tu link único, listo para compartir con todos tus invitados." },
+  { title: "El recuerdo permanece", body: "Tu sitio queda activo para siempre — el recuerdo digital que no se borra." },
+];
+
+export const weddingPlans = [
+  {
+    id: "eterno",
+    name: "Eterno",
+    tagline: "La esencia de tu gran día",
+    price: 497000,
+    featured: false,
+    features: [
+      "Invitación digital animada",
+      "RSVP y confirmaciones",
+      "Cuenta regresiva",
+      "Información del evento",
+      "Link de ubicación",
+      "Paleta personalizada",
+    ],
+    excluded: ["Galería fotográfica", "Historia de la pareja", "Libro de firmas"],
+  },
+  {
+    id: "nupcial",
+    name: "Nupcial",
+    tagline: "La experiencia completa",
+    price: 797000,
+    featured: true,
+    badge: "Más solicitado",
+    features: [
+      "Todo lo de Eterno",
+      "Galería fotográfica",
+      "Historia de la pareja",
+      "Música de fondo",
+      "Mesa de regalos",
+      "Dress code visual",
+      "Panel de confirmaciones",
+      "Programa del evento",
+    ],
+    excluded: ["Libro de firmas"],
+  },
+  {
+    id: "grand-amour",
+    name: "Grand Amour",
+    tagline: "Experiencia sin límites",
+    price: 1097000,
+    featured: false,
+    features: [
+      "Todo lo de Nupcial",
+      "Libro de firmas digital",
+      "Trivia de la pareja",
+      "Álbum post-boda",
+      "Mapa con hoteles",
+      "Agradecimientos",
+      "Portada exclusiva",
+      "Soporte 30 días",
+      "Entrega prioritaria",
+    ],
+    excluded: [],
+  },
+];
+
+export const weddingExtras = [
+  { id: "bilingue", name: "Diseño bilingüe (ES + EN)", price: 80000 },
+  { id: "qr-fisico", name: "QR físico para imprimir", price: 50000 },
+  { id: "album-digital", name: "Álbum digital post-evento", price: 150000 },
+  { id: "entrega-urgente", name: "Entrega urgente (menos de 48h)", price: 100000 },
+];
+
+// Arma el mensaje de WhatsApp con el resumen de la cotización de boda.
+export function waWeddingQuoteMessage({ plan, extras, guests, total }) {
+  const extrasText = extras.length ? extras.map((e) => `- ${e.name}`).join("\n") : "Ninguno";
+  const guestsText = guests ? `${guests} invitados aprox.` : "Sin definir";
+  return waLink(
+    `Hola! Quiero cotizar mi boda con Dear Guest.\n\n` +
+      `Paquete: ${plan.name} (${formatCOP(plan.price)})\n` +
+      `Extras:\n${extrasText}\n` +
+      `Invitados: ${guestsText}\n\n` +
+      `Total estimado: ${formatCOP(total)}`
+  );
+}
+
 // ---------- Programa de Alianzas (/alianzas) ----------
 
 export const alliesAudience = [

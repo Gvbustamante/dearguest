@@ -85,4 +85,4 @@ export function InstagramIcon(props) {
   );
 }
 
-export const ICONS = { heart: HeartIcon, phone: PhoneIcon, clock: ClockIcon };
+export const ICONS = { heart: HeartIcon, phone: PhoneIcon, clock: ClockIcon, diamond: DiamondIcon };

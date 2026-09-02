@@ -1,7 +1,8 @@
 import Button from "./Button.jsx";
 import { DiamondIcon } from "./icons.jsx";
 
-export default function Header() {
+export default function Header({ mode = "quince", onModeChange }) {
+  const isBodas = mode === "bodas";
   return (
     <header>
       <div className="container">
@@ -10,9 +11,29 @@ export default function Header() {
             <DiamondIcon className="brand-mark" />
             <span className="brand-name">Dear Guest</span>
           </a>
+          <div className="mode-toggle" role="tablist" aria-label="Tipo de evento">
+            <button
+              type="button"
+              role="tab"
+              aria-selected={!isBodas}
+              className={!isBodas ? "active" : ""}
+              onClick={() => onModeChange?.("quince")}
+            >
+              Quinceañeras
+            </button>
+            <button
+              type="button"
+              role="tab"
+              aria-selected={isBodas}
+              className={isBodas ? "active" : ""}
+              onClick={() => onModeChange?.("bodas")}
+            >
+              Bodas
+            </button>
+          </div>
           <div className="nav-links">
             <a href="#paquetes">Paquetes</a>
-            <a href="#tematicas">Temáticas</a>
+            {!isBodas && <a href="#tematicas">Temáticas</a>}
             <a href="#cotizar">Cotizar</a>
             <a href="#contacto">Contacto</a>
           </div>
