@@ -5,11 +5,13 @@ import AdminClients from "./AdminClients.jsx";
 import AdminMessages from "./AdminMessages.jsx";
 import AdminPlans from "./AdminPlans.jsx";
 import AdminSections from "./AdminSections.jsx";
+import AdminAllies from "./AdminAllies.jsx";
 
 const TABS = [
   { id: "clients", label: "Clientes" },
   { id: "messages", label: "Mensajes" },
   { id: "plans", label: "Paquetes" },
+  { id: "allies", label: "Aliados" },
   { id: "sections", label: "Secciones" },
 ];
 
@@ -45,6 +47,7 @@ export default function AdminDashboard() {
         {tab === "clients" && <AdminClients />}
         {tab === "messages" && <AdminMessages />}
         {tab === "plans" && <AdminPlans />}
+        {tab === "allies" && <AdminAllies />}
         {tab === "sections" && <AdminSections />}
       </main>
     </div>

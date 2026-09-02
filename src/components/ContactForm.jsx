@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { CONTACT_FORM_ENDPOINT } from "../data/content.js";
 import { supabase } from "../lib/supabase.js";
+import { withReferralNote } from "../lib/referral.js";
 
 const STATUS = { IDLE: "idle", SENDING: "sending", OK: "ok", ERROR: "error" };
 
@@ -67,7 +68,7 @@ export default function ContactForm({ lang = "es" }) {
         nombre: data.get("nombre"),
         contacto: data.get("contacto"),
         tipo_consulta: data.get("tipo_consulta"),
-        mensaje: data.get("mensaje"),
+        mensaje: withReferralNote(data.get("mensaje")),
       })
       .then(() => {});
 

@@ -235,6 +235,10 @@
   padding: 0.2em 0;
   text-decoration: underline;
 }
+.admin-referral-link {
+  font-family: monospace;
+  white-space: nowrap;
+}
 
 .admin-messages {
   display: flex;

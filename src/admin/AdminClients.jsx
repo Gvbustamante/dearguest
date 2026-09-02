@@ -14,10 +14,20 @@ const STATUSES = [
   "Finalizado",
 ];
 
-const EMPTY_FORM = { name: "", event_type: "Quinceañera", package: "", event_date: "", phone: "", email: "", notes: "" };
+const EMPTY_FORM = {
+  name: "",
+  event_type: "Quinceañera",
+  package: "",
+  event_date: "",
+  phone: "",
+  email: "",
+  notes: "",
+  ally_id: "",
+};
 
 export default function AdminClients() {
   const [clients, setClients] = useState(null);
+  const [allies, setAllies] = useState([]);
   const [showForm, setShowForm] = useState(false);
   const [form, setForm] = useState(EMPTY_FORM);
   const [saving, setSaving] = useState(false);
@@ -31,6 +41,11 @@ export default function AdminClients() {
 
   useEffect(() => {
     load();
+    supabase
+      .from("allies")
+      .select("id, name, business_name")
+      .order("name", { ascending: true })
+      .then(({ data }) => setAllies(data ?? []));
   }, []);
 
   async function handleAdd(event) {
@@ -40,6 +55,7 @@ export default function AdminClients() {
     const { error: insertError } = await supabase.from("clients").insert({
       ...form,
       event_date: form.event_date || null,
+      ally_id: form.ally_id || null,
     });
     setSaving(false);
     if (insertError) {
@@ -53,6 +69,14 @@ export default function AdminClients() {
 
   async function updateStatus(id, status) {
     await supabase.from("clients").update({ status, updated_at: new Date().toISOString() }).eq("id", id);
+    load();
+  }
+
+  async function updateAlly(id, allyId) {
+    await supabase
+      .from("clients")
+      .update({ ally_id: allyId || null, updated_at: new Date().toISOString() })
+      .eq("id", id);
     load();
   }
 
@@ -107,6 +131,18 @@ export default function AdminClients() {
               <label>Email</label>
               <input type="email" value={form.email} onChange={(e) => setForm({ ...form, email: e.target.value })} />
             </div>
+            <div className="cf-field">
+              <label>Referido por (opcional)</label>
+              <select value={form.ally_id} onChange={(e) => setForm({ ...form, ally_id: e.target.value })}>
+                <option value="">Ninguno</option>
+                {allies.map((a) => (
+                  <option key={a.id} value={a.id}>
+                    {a.name}
+                    {a.business_name ? ` — ${a.business_name}` : ""}
+                  </option>
+                ))}
+              </select>
+            </div>
           </div>
           <div className="cf-field">
             <label>Notas</label>
@@ -133,6 +169,7 @@ export default function AdminClients() {
                 <th>Paquete</th>
                 <th>Fecha</th>
                 <th>Contacto</th>
+                <th>Referido por</th>
                 <th>Estado</th>
                 <th></th>
               </tr>
@@ -147,6 +184,17 @@ export default function AdminClients() {
                   <td>
                     {c.phone && <div>{c.phone}</div>}
                     {c.email && <div>{c.email}</div>}
+                  </td>
+                  <td>
+                    <select value={c.ally_id ?? ""} onChange={(e) => updateAlly(c.id, e.target.value)}>
+                      <option value="">Ninguno</option>
+                      {allies.map((a) => (
+                        <option key={a.id} value={a.id}>
+                          {a.name}
+                          {a.business_name ? ` — ${a.business_name}` : ""}
+                        </option>
+                      ))}
+                    </select>
                   </td>
                   <td>
                     <select value={c.status} onChange={(e) => updateStatus(c.id, e.target.value)}>

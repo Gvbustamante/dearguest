@@ -1641,6 +1641,17 @@ section {
   background: var(--olive-soft);
   color: var(--olive-deep);
 }
+.allies-referral-preview {
+  margin-top: 1.2em;
+  padding-top: 1.2em;
+  border-top: 1px solid var(--line);
+  font-size: 0.86rem;
+  opacity: 0.85;
+  word-break: break-all;
+}
+.allies-referral-preview strong {
+  color: var(--olive);
+}
 .steps-3 {
   max-width: 900px;
   margin-inline: auto;

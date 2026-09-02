@@ -11,6 +11,7 @@ import {
   CONTACT_FORM_ENDPOINT,
 } from "../data/content.js";
 import { supabase } from "../lib/supabase.js";
+import { slugifyReferralCode } from "../lib/referral.js";
 
 const STATUS = { IDLE: "idle", SENDING: "sending", OK: "ok", ERROR: "error" };
 
@@ -36,6 +37,7 @@ function AlliesHeader() {
 
 function AlliesForm() {
   const [status, setStatus] = useState(STATUS.IDLE);
+  const [referralLink, setReferralLink] = useState("");
 
   async function handleSubmit(event) {
     event.preventDefault();
@@ -49,6 +51,7 @@ function AlliesForm() {
     const tipo = data.get("tipo_negocio");
     const detalle = data.get("mensaje");
     const mensaje = `Negocio: ${negocio} — Tipo: ${tipo}. ${detalle}`;
+    const referralCode = slugifyReferralCode(negocio);
 
     // Se guarda como mensaje de contacto (tipo "Aliado/Planner") para que
     // aparezca en el mismo panel /admin, junto a los demás mensajes.
@@ -56,6 +59,22 @@ function AlliesForm() {
       .from("contact_messages")
       .insert({ nombre, contacto, tipo_consulta: "Aliado/Planner", mensaje })
       .then(() => {});
+
+    // Crea el registro de aliado con su código de referido — visible y
+    // administrable desde /admin > Aliados en cuanto se aprueba.
+    supabase
+      .from("allies")
+      .insert({
+        name: nombre,
+        business_name: negocio,
+        business_type: tipo,
+        contact: contacto,
+        referral_code: referralCode,
+        notes: detalle,
+      })
+      .then(() => {});
+
+    setReferralLink(`${window.location.origin}/?ref=${referralCode}`);
 
     try {
       const response = await fetch(CONTACT_FORM_ENDPOINT, {
@@ -80,6 +99,11 @@ function AlliesForm() {
         <div className="cf-msg cf-msg-ok">
           <strong>¡Postulación enviada!</strong>
           <p>Gracias por tu interés. Te contactamos en menos de 48 horas.</p>
+          <p className="allies-referral-preview">
+            Ya puedes empezar a compartir tu link de referido:
+            <br />
+            <strong>{referralLink}</strong>
+          </p>
         </div>
       ) : (
         <form onSubmit={handleSubmit}>

@@ -4,6 +4,9 @@ import "./index.css";
 import App from "./App.jsx";
 import AdminApp from "./admin/AdminApp.jsx";
 import AlliesPage from "./components/AlliesPage.jsx";
+import { captureReferralFromUrl } from "./lib/referral.js";
+
+captureReferralFromUrl();
 
 const path = window.location.pathname;
 
