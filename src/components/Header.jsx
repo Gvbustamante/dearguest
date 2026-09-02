@@ -12,6 +12,7 @@ const COPY = {
     cta: "Ver paquetes",
     langLabel: "EN",
     langHref: "/en",
+    homeHref: "/es",
   },
   en: {
     quince: "Quinceañera",
@@ -22,7 +23,8 @@ const COPY = {
     contacto: "Contact",
     cta: "See packages",
     langLabel: "ES",
-    langHref: "/",
+    langHref: "/es",
+    homeHref: "/en",
   },
 };
 
@@ -33,7 +35,7 @@ export default function Header({ mode = "quince", onModeChange, lang = "es" }) {
     <header>
       <div className="container">
         <nav>
-          <a className="brand" href={lang === "en" ? "/en" : "/"}>
+          <a className="brand" href={t.homeHref}>
             <DiamondIcon className="brand-mark" />
             <span className="brand-name">Dear Guest</span>
           </a>

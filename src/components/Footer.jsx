@@ -33,13 +33,13 @@ const COPY = {
 export default function Footer({ lang = "es" }) {
   const year = new Date().getFullYear();
   const t = COPY[lang] ?? COPY.es;
-  const base = lang === "en" ? "/en" : "";
+  const base = lang === "en" ? "/en" : "/es";
   return (
     <footer>
       <div className="container">
         <div className="foot-grid">
           <div className="foot-brand">
-            <a className="brand" href={base || "/"}>
+            <a className="brand" href={base}>
               <DiamondIcon className="brand-mark" />
               <span className="brand-name">Dear Guest</span>
             </a>
