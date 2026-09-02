@@ -14,20 +14,27 @@ function fromRow(row) {
     badge: row.badge,
     wompiUrl: row.wompi_url,
     features: row.features,
+    category: row.category,
+    currency: row.currency,
   };
 }
 
-// Lee los paquetes desde Supabase (editables en /admin). Arranca con los
-// datos estáticos de content.js para que la página nunca se vea vacía
-// mientras carga, y los reemplaza en cuanto llega la respuesta real.
-export function usePlans() {
-  const [plans, setPlans] = useState(staticPlans);
+// Lee los paquetes desde Supabase (editables en /admin), filtrados por
+// categoría de evento (quince/bodas/bautizo/cumpleanos/renovacion) y moneda
+// (cop/usd). Arranca con los datos estáticos de content.js para el combo por
+// defecto (quince/cop) para que la página nunca se vea vacía mientras carga.
+export function usePlans(category = "quince", currency = "cop") {
+  const isDefault = category === "quince" && currency === "cop";
+  const [plans, setPlans] = useState(isDefault ? staticPlans : []);
 
   useEffect(() => {
     let active = true;
+    setPlans(category === "quince" && currency === "cop" ? staticPlans : []);
     supabase
       .from("plans")
       .select("*")
+      .eq("category", category)
+      .eq("currency", currency)
       .order("sort_order", { ascending: true })
       .then(({ data, error }) => {
         if (!active || error || !data || data.length === 0) return;
@@ -36,7 +43,7 @@ export function usePlans() {
     return () => {
       active = false;
     };
-  }, []);
+  }, [category, currency]);
 
   return plans;
 }

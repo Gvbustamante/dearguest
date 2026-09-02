@@ -3,53 +3,99 @@ import InviteCard from "./InviteCard.jsx";
 import { useHeroBackground } from "../hooks/useHeroBackground.js";
 
 const CONTENT = {
-  quince: {
-    eyebrow: "Experiencias digitales para XV años",
-    title: (
-      <>
-        Haz que tus 15 brillen
-        <br />
-        <em>desde el primer clic.</em>
-      </>
-    ),
-    lede: "Un sitio web hecho a mano para tu quinceañera: sus fotos, su música, su historia — y un código QR que cada invitado lleva en su celular. No se pierde, no se daña. Queda para siempre.",
-    primaryHref: "#paquetes",
-    primaryLabel: "Ver paquetes y precios",
-    ghostHref: "#tematicas",
-    ghostLabel: "Ver temáticas",
-    notes: [
-      { strong: "3–5 días", label: "de entrega" },
-      { strong: "4", label: "temáticas para elegir" },
-      { strong: "QR + RSVP", label: "incluidos" },
-    ],
-    invite: { name: "Valentina", date: "15 de noviembre · Barranquilla", confirmations: 128 },
+  es: {
+    quince: {
+      eyebrow: "Experiencias digitales para XV años",
+      title: (
+        <>
+          Haz que tus 15 brillen
+          <br />
+          <em>desde el primer clic.</em>
+        </>
+      ),
+      lede: "Un sitio web hecho a mano para tu quinceañera: sus fotos, su música, su historia — y un código QR que cada invitado lleva en su celular. No se pierde, no se daña. Queda para siempre.",
+      primaryHref: "#paquetes",
+      primaryLabel: "Ver paquetes y precios",
+      ghostHref: "#tematicas",
+      ghostLabel: "Ver temáticas",
+      notes: [
+        { strong: "3–5 días", label: "de entrega" },
+        { strong: "4", label: "temáticas para elegir" },
+        { strong: "QR + RSVP", label: "incluidos" },
+      ],
+      invite: { name: "Valentina", date: "15 de noviembre · Barranquilla", confirmations: 128 },
+    },
+    bodas: {
+      eyebrow: "Experiencias digitales para bodas",
+      title: (
+        <>
+          Tu boda merece
+          <br />
+          <em>más que una tarjeta.</em>
+        </>
+      ),
+      lede: "Una invitación digital hecha a mano: fotos, historia de la pareja, RSVP y cuenta regresiva — el primer momento que tus invitados viven de tu gran día. No se pierde, no se daña. Queda para siempre.",
+      primaryHref: "#paquetes",
+      primaryLabel: "Ver experiencias y precios",
+      ghostHref: "#cotizar",
+      ghostLabel: "Cotizar mi boda",
+      notes: [
+        { strong: "5 días", label: "de entrega" },
+        { strong: "RSVP", label: "y confirmaciones" },
+        { strong: "Cuenta regresiva", label: "en vivo" },
+      ],
+      invite: { name: "Ingrid & Sebastián", date: "14 de febrero · Club Lagos de Caujaral", confirmations: 96 },
+    },
   },
-  bodas: {
-    eyebrow: "Experiencias digitales para bodas",
-    title: (
-      <>
-        Tu boda merece
-        <br />
-        <em>más que una tarjeta.</em>
-      </>
-    ),
-    lede: "Una invitación digital hecha a mano: fotos, historia de la pareja, RSVP y cuenta regresiva — el primer momento que tus invitados viven de tu gran día. No se pierde, no se daña. Queda para siempre.",
-    primaryHref: "#paquetes",
-    primaryLabel: "Ver experiencias y precios",
-    ghostHref: "#cotizar",
-    ghostLabel: "Cotizar mi boda",
-    notes: [
-      { strong: "5 días", label: "de entrega" },
-      { strong: "RSVP", label: "y confirmaciones" },
-      { strong: "Cuenta regresiva", label: "en vivo" },
-    ],
-    invite: { name: "Ingrid & Sebastián", date: "14 de febrero · Club Lagos de Caujaral", confirmations: 96 },
+  en: {
+    quince: {
+      eyebrow: "Digital experiences for Quinceañeras",
+      title: (
+        <>
+          Make her 15th shine
+          <br />
+          <em>from the first click.</em>
+        </>
+      ),
+      lede: "A handcrafted website for her quinceañera: her photos, her music, her story — and a QR code every guest carries on their phone. Never lost, never damaged. It lasts forever.",
+      primaryHref: "#paquetes",
+      primaryLabel: "See packages & pricing",
+      ghostHref: "#tematicas",
+      ghostLabel: "Browse themes",
+      notes: [
+        { strong: "3–5 days", label: "delivery" },
+        { strong: "4", label: "themes to choose from" },
+        { strong: "QR + RSVP", label: "included" },
+      ],
+      invite: { name: "Valentina", date: "November 15 · Barranquilla", confirmations: 128 },
+    },
+    bodas: {
+      eyebrow: "Digital experiences for weddings",
+      title: (
+        <>
+          Your wedding deserves
+          <br />
+          <em>more than a card.</em>
+        </>
+      ),
+      lede: "A handcrafted digital invitation: photos, your love story, RSVP and a live countdown — the first moment your guests experience of your big day. Never lost, never damaged. It lasts forever.",
+      primaryHref: "#paquetes",
+      primaryLabel: "See experiences & pricing",
+      ghostHref: "#cotizar",
+      ghostLabel: "Get my wedding quote",
+      notes: [
+        { strong: "5 days", label: "delivery" },
+        { strong: "RSVP", label: "& confirmations" },
+        { strong: "Live", label: "countdown" },
+      ],
+      invite: { name: "Ingrid & Sebastian", date: "February 14 · Club Lagos de Caujaral", confirmations: 96 },
+    },
   },
 };
 
-export default function Hero({ mode = "quince" }) {
+export default function Hero({ mode = "quince", lang = "es" }) {
   const bgUrl = useHeroBackground(mode);
-  const content = CONTENT[mode] ?? CONTENT.quince;
+  const content = (CONTENT[lang] ?? CONTENT.es)[mode] ?? CONTENT.es.quince;
 
   return (
     <section className={`hero${bgUrl ? " hero-has-bg" : ""}`} style={bgUrl ? { backgroundImage: `url(${bgUrl})` } : undefined}>

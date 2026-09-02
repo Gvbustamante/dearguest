@@ -314,6 +314,18 @@
   background: var(--olive);
   color: var(--paper);
 }
+.admin-category-toggle {
+  flex-wrap: wrap;
+}
+.admin-currency-group {
+  margin-bottom: 2.2rem;
+}
+.admin-currency-group h3 {
+  font-family: "Playfair Display", serif;
+  font-size: 1rem;
+  margin: 0 0 0.9rem;
+  opacity: 0.75;
+}
 
 .admin-hero-bg {
   background: var(--paper-soft);
