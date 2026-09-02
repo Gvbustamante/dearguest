@@ -6,11 +6,15 @@
 :root {
   --paper: #fffff2; /* Marfil — fondo, en todo el sitio */
   --paper-soft: #f5eedb; /* Marfil, un tono más profundo — tarjetas */
-  --ink: #2e1b12; /* Chocolate — texto */
+  --ink: #2e1b12; /* Chocolate — texto, y pequeños detalles */
   --ink-soft: rgba(46, 27, 18, 0.68);
-  --wine: #6e1e33; /* Borgoña — acento */
-  --wine-deep: #4a1322; /* Borgoña, más oscuro — hover */
-  --wine-soft: rgba(110, 30, 51, 0.08);
+  --olive: #6b7a3a; /* Verde oliva — color PRINCIPAL de la marca */
+  --olive-deep: #4f5c29; /* Oliva, más oscuro — hover */
+  --olive-soft: rgba(107, 122, 58, 0.12);
+  --olive-glow: rgba(107, 122, 58, 0.32); /* para sombras con color, no solo negro */
+  --wine: #6e1e33; /* Borgoña — solo para pequeños detalles/acentos puntuales */
+  --wine-deep: #4a1322;
+  --wine-soft: rgba(110, 30, 51, 0.1);
   --line: rgba(46, 27, 18, 0.16);
   --shadow: 0 24px 60px -30px rgba(46, 27, 18, 0.4);
   --radius: 20px;
@@ -24,6 +28,10 @@
     --paper-soft: #251708;
     --ink: #f3e7d8;
     --ink-soft: rgba(243, 231, 216, 0.68);
+    --olive: #a8bd63;
+    --olive-deep: #c2d485;
+    --olive-soft: rgba(168, 189, 99, 0.16);
+    --olive-glow: rgba(168, 189, 99, 0.3);
     --wine: #e08faa;
     --wine-deep: #f0aec3;
     --wine-soft: rgba(224, 143, 170, 0.12);
@@ -36,6 +44,10 @@
   --paper-soft: #251708;
   --ink: #f3e7d8;
   --ink-soft: rgba(243, 231, 216, 0.68);
+  --olive: #a8bd63;
+  --olive-deep: #c2d485;
+  --olive-soft: rgba(168, 189, 99, 0.16);
+  --olive-glow: rgba(168, 189, 99, 0.3);
   --wine: #e08faa;
   --wine-deep: #f0aec3;
   --wine-soft: rgba(224, 143, 170, 0.12);
@@ -47,9 +59,13 @@
   --paper-soft: #f5eedb;
   --ink: #2e1b12;
   --ink-soft: rgba(46, 27, 18, 0.68);
+  --olive: #6b7a3a;
+  --olive-deep: #4f5c29;
+  --olive-soft: rgba(107, 122, 58, 0.12);
+  --olive-glow: rgba(107, 122, 58, 0.32);
   --wine: #6e1e33;
   --wine-deep: #4a1322;
-  --wine-soft: rgba(110, 30, 51, 0.08);
+  --wine-soft: rgba(110, 30, 51, 0.1);
   --line: rgba(46, 27, 18, 0.16);
   --shadow: 0 24px 60px -30px rgba(46, 27, 18, 0.4);
 }
@@ -106,14 +122,18 @@ h3 {
   font-weight: 600;
   letter-spacing: 0.16em;
   text-transform: uppercase;
-  color: var(--wine);
+  color: var(--olive);
 }
 .eyebrow::before {
   content: "";
   width: 22px;
   height: 1.5px;
-  background: var(--wine);
+  background: var(--olive);
   display: inline-block;
+  transition: width 0.5s ease;
+}
+.reveal.in .eyebrow::before {
+  width: 34px;
 }
 .btn {
   display: inline-flex;
@@ -127,6 +147,9 @@ h3 {
   border: 1.5px solid transparent;
   cursor: pointer;
   text-decoration: none;
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
   transition:
     transform 0.22s ease,
     box-shadow 0.22s ease,
@@ -135,18 +158,30 @@ h3 {
   min-height: 44px;
 }
 .btn:focus-visible {
-  outline: 2px solid var(--wine);
+  outline: 2px solid var(--olive);
   outline-offset: 3px;
 }
 .btn-primary {
-  background: var(--wine);
+  background: var(--olive);
   color: var(--paper);
-  box-shadow: 0 14px 30px -14px var(--wine);
+  box-shadow: 0 14px 30px -14px var(--olive-glow);
+}
+.btn-primary::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: linear-gradient(115deg, transparent 20%, rgba(255, 255, 255, 0.3) 40%, transparent 60%);
+  transform: translateX(-120%);
+  transition: transform 0.55s ease;
 }
 .btn-primary:hover {
   transform: translateY(-2px);
-  box-shadow: 0 18px 34px -12px var(--wine);
-  background: var(--wine-deep);
+  box-shadow: 0 20px 38px -14px var(--olive-glow);
+  background: var(--olive-deep);
+}
+.btn-primary:hover::before {
+  transform: translateX(120%);
 }
 .btn-ghost {
   border-color: var(--line);
@@ -154,13 +189,19 @@ h3 {
   background: transparent;
 }
 .btn-ghost:hover {
-  border-color: var(--wine);
-  color: var(--wine);
+  border-color: var(--olive);
+  color: var(--olive);
+  background: var(--olive-soft);
 }
 .btn svg {
   width: 18px;
   height: 18px;
   flex: none;
+}
+@media (prefers-reduced-motion: reduce) {
+  .btn-primary::before {
+    display: none;
+  }
 }
 
 /* ---------- Nav ---------- */
@@ -188,7 +229,11 @@ nav {
   width: 30px;
   height: 30px;
   flex: none;
-  color: var(--wine);
+  color: var(--olive);
+  transition: transform 0.4s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+.brand:hover .brand-mark {
+  transform: rotate(90deg);
 }
 .brand-name {
   font-family: "Playfair Display", serif;
@@ -203,13 +248,27 @@ nav {
   font-weight: 500;
 }
 .nav-links a {
+  position: relative;
   text-decoration: none;
   opacity: 0.82;
   transition: opacity 0.2s;
 }
+.nav-links a::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 100%;
+  bottom: -4px;
+  height: 1.5px;
+  background: var(--olive);
+  transition: right 0.25s ease;
+}
 .nav-links a:hover {
   opacity: 1;
-  color: var(--wine);
+  color: var(--olive);
+}
+.nav-links a:hover::after {
+  right: 0;
 }
 .nav-cta {
   display: flex;
@@ -226,6 +285,19 @@ nav {
 .hero {
   padding: 88px 0 96px;
   position: relative;
+  overflow: hidden;
+}
+.hero::before {
+  content: "";
+  position: absolute;
+  top: -20%;
+  right: -10%;
+  width: 62vw;
+  max-width: 720px;
+  aspect-ratio: 1;
+  background: radial-gradient(circle, var(--olive-soft) 0%, transparent 68%);
+  pointer-events: none;
+  z-index: -1;
 }
 .hero-grid {
   display: grid;
@@ -245,7 +317,7 @@ nav {
 }
 .hero h1 em {
   font-style: italic;
-  color: var(--wine);
+  color: var(--olive);
 }
 .hero p.lede {
   font-size: 1.08rem;
@@ -268,7 +340,7 @@ nav {
   opacity: 0.72;
 }
 .hero-note strong {
-  color: var(--wine);
+  color: var(--olive);
   font-weight: 600;
 }
 
@@ -285,12 +357,28 @@ nav {
   background: var(--paper-soft);
   border: 1px solid var(--line);
   box-shadow: var(--shadow);
-  transform: rotate(3deg);
   position: relative;
   transition: transform 0.5s cubic-bezier(0.2, 0.7, 0.2, 1);
+  animation: invite-float 6s ease-in-out infinite;
 }
 .invite-card:hover {
+  animation-play-state: paused;
   transform: rotate(0deg) translateY(-6px);
+}
+@keyframes invite-float {
+  0%,
+  100% {
+    transform: rotate(3deg) translateY(0);
+  }
+  50% {
+    transform: rotate(1.4deg) translateY(-10px);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .invite-card {
+    animation: none;
+    transform: rotate(3deg);
+  }
 }
 .invite-top {
   display: flex;
@@ -300,7 +388,7 @@ nav {
   width: 56px;
   height: 56px;
   border-radius: 50%;
-  background: var(--wine);
+  background: var(--olive);
   color: var(--paper);
   font-family: "Playfair Display", serif;
   font-weight: 600;
@@ -393,11 +481,12 @@ nav {
 .float-card svg {
   width: 20px;
   height: 20px;
-  color: var(--wine);
+  color: var(--olive);
   flex: none;
 }
 @media (max-width: 900px) {
   .invite-card {
+    animation: none;
     transform: rotate(1.5deg);
   }
 }
@@ -468,12 +557,21 @@ section {
   width: 46px;
   height: 46px;
   border-radius: 50%;
-  background: var(--wine-soft);
-  color: var(--wine);
+  background: var(--olive-soft);
+  color: var(--olive);
   display: flex;
   align-items: center;
   justify-content: center;
   margin-bottom: 1.3em;
+  transition:
+    transform 0.3s ease,
+    background 0.3s ease,
+    color 0.3s ease;
+}
+.benefit:hover .benefit-icon {
+  background: var(--olive);
+  color: var(--paper);
+  transform: scale(1.08) rotate(-6deg);
 }
 .benefit-icon svg {
   width: 22px;
@@ -538,7 +636,8 @@ section {
 }
 .step:hover {
   transform: rotate(0deg) translateY(-4px) !important;
-  box-shadow: var(--shadow);
+  box-shadow: var(--shadow), 0 0 0 1.5px var(--olive-soft);
+  border-color: var(--olive-soft);
   z-index: 2;
 }
 .steps > .step:nth-child(4n + 1) {
@@ -566,7 +665,7 @@ section {
   width: 32px;
   height: 32px;
   border-radius: 50%;
-  background: var(--wine);
+  background: var(--olive);
   color: var(--paper);
   font-family: "Playfair Display", serif;
   font-weight: 600;
@@ -621,10 +720,10 @@ section {
 }
 .plan:hover {
   transform: translateY(-6px);
-  box-shadow: var(--shadow);
+  box-shadow: var(--shadow), 0 0 0 1.5px var(--olive-soft);
 }
 .plan.featured {
-  background: var(--wine);
+  background: var(--olive);
   color: var(--paper);
   transform: translateY(-14px);
   box-shadow: var(--shadow);
@@ -715,8 +814,8 @@ section {
   margin-top: 0.4em;
   padding: 0.2em 0.8em;
   border-radius: 100px;
-  background: var(--wine-soft);
-  color: var(--wine);
+  background: var(--olive-soft);
+  color: var(--olive);
   font-size: 0.74rem;
   font-weight: 600;
 }
@@ -749,7 +848,7 @@ section {
   height: 17px;
   flex: none;
   margin-top: 0.16em;
-  color: var(--wine);
+  color: var(--olive);
 }
 .plan.featured .plan-list svg {
   color: var(--paper);
@@ -764,7 +863,7 @@ section {
 }
 .plan.featured .btn-primary {
   background: var(--paper);
-  color: var(--wine);
+  color: var(--olive);
   box-shadow: none;
 }
 .plan.featured .btn-primary:hover {
@@ -790,7 +889,7 @@ section {
   font-family: "Playfair Display", serif;
   font-weight: 700;
   font-size: 1.5rem;
-  color: var(--wine);
+  color: var(--olive);
   line-height: 1;
 }
 .trust-l {
@@ -830,7 +929,7 @@ section {
   text-align: left !important;
 }
 .cmp-th-featured {
-  color: var(--wine);
+  color: var(--olive);
 }
 .cmp-td-feature,
 .cmp-table td:first-child {
@@ -863,8 +962,8 @@ section {
   height: 12px;
 }
 .cmp-mark.yes {
-  background: var(--wine-soft);
-  color: var(--wine);
+  background: var(--olive-soft);
+  color: var(--olive);
 }
 .cmp-mark.no {
   background: var(--line);
@@ -892,7 +991,7 @@ section {
 
 /* ---------- Calculadora ---------- */
 .calculator-section {
-  background: var(--wine-soft);
+  background: var(--olive-soft);
 }
 .calc-card {
   max-width: 620px;
@@ -934,11 +1033,11 @@ section {
     background 0.2s;
 }
 .calc-opt:hover {
-  border-color: var(--wine);
+  border-color: var(--olive);
 }
 .calc-opt.sel {
-  border-color: var(--wine);
-  background: var(--wine-soft);
+  border-color: var(--olive);
+  background: var(--olive-soft);
 }
 .calc-opt input {
   position: absolute;
@@ -959,8 +1058,8 @@ section {
   transition: all 0.18s;
 }
 .calc-opt.sel .calc-radio {
-  border-color: var(--wine);
-  background: var(--wine);
+  border-color: var(--olive);
+  background: var(--olive);
 }
 .calc-radio svg {
   width: 12px;
@@ -993,7 +1092,7 @@ section {
 .calc-opt-curr {
   font-size: 1.05rem;
   font-weight: 700;
-  color: var(--wine);
+  color: var(--olive);
   font-variant-numeric: tabular-nums;
 }
 .calc-result {
@@ -1016,7 +1115,7 @@ section {
   font-family: "Playfair Display", serif;
   font-size: 2.4rem;
   font-weight: 700;
-  color: var(--wine);
+  color: var(--olive);
   font-variant-numeric: tabular-nums;
   line-height: 1;
 }
@@ -1025,8 +1124,8 @@ section {
   margin-top: 0.5em;
   padding: 0.2em 0.8em;
   border-radius: 100px;
-  background: var(--wine-soft);
-  color: var(--wine);
+  background: var(--olive-soft);
+  color: var(--olive);
   font-size: 0.76rem;
   font-weight: 600;
 }
@@ -1076,7 +1175,7 @@ section {
 .cf-field input:focus,
 .cf-field select:focus,
 .cf-field textarea:focus {
-  border-color: var(--wine);
+  border-color: var(--olive);
 }
 .cf-field textarea {
   min-height: 110px;
@@ -1095,7 +1194,7 @@ section {
   font-family: "Playfair Display", serif;
   font-style: italic;
   font-size: 1.3rem;
-  color: var(--wine);
+  color: var(--olive);
 }
 .cf-msg-ok p {
   opacity: 0.72;
@@ -1162,16 +1261,22 @@ section {
   }
   .theme-card:hover {
     transform: rotate(0deg) translateY(-16px) !important;
+    box-shadow: var(--shadow), 0 0 0 1.5px var(--olive-soft) !important;
     z-index: 5 !important;
   }
 }
 .theme-swatch-wrap {
   position: relative;
+  overflow: hidden;
 }
 .theme-swatch {
   height: 92px;
   width: 100%;
   object-fit: cover;
+  transition: transform 0.5s ease;
+}
+.theme-card:hover .theme-swatch {
+  transform: scale(1.08);
 }
 .theme-badge {
   position: absolute;
@@ -1202,7 +1307,7 @@ section {
 .theme-body a {
   font-size: 0.82rem;
   font-weight: 600;
-  color: var(--wine);
+  color: var(--olive);
   text-decoration: none;
   display: inline-flex;
   align-items: center;
@@ -1219,7 +1324,7 @@ section {
 
 /* ---------- CTA — banda a sangre completa ---------- */
 .cta {
-  background: var(--wine);
+  background: var(--olive);
   color: var(--paper);
   padding: 5.5rem 0;
   position: relative;
@@ -1254,7 +1359,7 @@ section {
 }
 .cta .btn-primary {
   background: var(--paper);
-  color: var(--wine);
+  color: var(--olive);
   box-shadow: none;
 }
 .cta .btn-primary:hover {
@@ -1266,6 +1371,29 @@ section {
   margin: 0 auto 1.1em;
   color: var(--paper);
   opacity: 0.9;
+  animation: cta-diamond-spin 14s linear infinite;
+}
+@keyframes cta-diamond-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+.cta-watermark {
+  animation: cta-watermark-spin 90s linear infinite;
+}
+@keyframes cta-watermark-spin {
+  from {
+    transform: translate(-50%, -50%) rotate(-8deg);
+  }
+  to {
+    transform: translate(-50%, -50%) rotate(352deg);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .cta-diamond,
+  .cta-watermark {
+    animation: none;
+  }
 }
 
 /* ---------- Programa de Alianzas (/alianzas) ---------- */
@@ -1300,6 +1428,15 @@ section {
   padding: 0.6em 1.3em;
   font-size: 0.92rem;
   font-weight: 500;
+  transition:
+    border-color 0.2s ease,
+    background 0.2s ease,
+    color 0.2s ease;
+}
+.allies-audience li:hover {
+  border-color: var(--olive);
+  background: var(--olive-soft);
+  color: var(--olive-deep);
 }
 .steps-3 {
   max-width: 900px;
@@ -1352,7 +1489,7 @@ footer {
   margin-bottom: 0.7em;
 }
 .foot-col a:hover {
-  color: var(--wine);
+  color: var(--olive);
   opacity: 1;
 }
 .foot-col a svg {
@@ -1393,6 +1530,15 @@ footer {
     transform 0.2s ease,
     box-shadow 0.2s ease;
 }
+.wa-float::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: #25d366;
+  z-index: -1;
+  animation: wa-pulse 2.6s ease-out infinite;
+}
 .wa-float:hover {
   transform: translateY(-3px) scale(1.05);
   box-shadow: 0 14px 30px -8px rgba(0, 0, 0, 0.5);
@@ -1401,9 +1547,22 @@ footer {
   width: 28px;
   height: 28px;
 }
+@keyframes wa-pulse {
+  0% {
+    transform: scale(1);
+    opacity: 0.45;
+  }
+  100% {
+    transform: scale(1.7);
+    opacity: 0;
+  }
+}
 @media (prefers-reduced-motion: reduce) {
   .wa-float:hover {
     transform: none;
+  }
+  .wa-float::before {
+    animation: none;
   }
 }
 
@@ -1427,6 +1586,6 @@ footer {
 }
 
 ::selection {
-  background: var(--wine);
+  background: var(--olive);
   color: var(--paper);
 }
