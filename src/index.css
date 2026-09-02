@@ -342,6 +342,52 @@ nav {
   pointer-events: none;
   z-index: -1;
 }
+/* Fondo de imagen opcional, editable desde /admin > Secciones. */
+.hero.hero-has-bg {
+  background-size: cover;
+  background-position: center;
+  color: var(--paper);
+}
+.hero.hero-has-bg::before {
+  display: none;
+}
+.hero.hero-has-bg::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(46, 27, 18, 0.6), rgba(46, 27, 18, 0.78));
+  z-index: -1;
+}
+.hero.hero-has-bg .eyebrow {
+  color: var(--paper);
+}
+.hero.hero-has-bg .eyebrow::before {
+  background: var(--paper);
+}
+.hero.hero-has-bg h1,
+.hero.hero-has-bg h1 em {
+  color: var(--paper);
+}
+.hero.hero-has-bg p.lede {
+  color: var(--paper);
+  opacity: 0.9;
+}
+.hero.hero-has-bg .hero-note {
+  color: var(--paper);
+  opacity: 0.85;
+}
+.hero.hero-has-bg .hero-note strong {
+  color: var(--paper);
+}
+.hero.hero-has-bg .btn-ghost {
+  border-color: rgba(255, 255, 255, 0.5);
+  color: var(--paper);
+}
+.hero.hero-has-bg .btn-ghost:hover {
+  background: rgba(255, 255, 255, 0.12);
+  border-color: var(--paper);
+  color: var(--paper);
+}
 .hero-grid {
   display: grid;
   grid-template-columns: 1.05fr 0.95fr;
@@ -1591,6 +1637,93 @@ section {
   .steps-5 {
     grid-template-columns: repeat(5, 1fr);
   }
+}
+
+/* ---------- Secciones personalizadas (/admin > Secciones) ---------- */
+.cs-hero {
+  position: relative;
+  min-height: 360px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  background-color: var(--paper-soft);
+  background-size: cover;
+  background-position: center;
+  overflow: hidden;
+}
+.cs-hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(46, 27, 18, 0.55), rgba(46, 27, 18, 0.72));
+}
+.cs-hero-inner {
+  position: relative;
+  color: var(--paper);
+  max-width: 640px;
+}
+.cs-hero-inner h2 {
+  color: var(--paper);
+  font-size: clamp(1.8rem, 3.4vw, 2.6rem);
+  margin-bottom: 0.5em;
+}
+.cs-hero-inner p {
+  opacity: 0.9;
+  margin-bottom: 1.6em;
+}
+
+.cs-text-image {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3.5rem;
+  align-items: center;
+}
+.cs-img-left {
+  direction: rtl;
+}
+.cs-img-left > * {
+  direction: ltr;
+}
+.cs-text-image-text h2 {
+  font-size: clamp(1.6rem, 3vw, 2.2rem);
+  margin-bottom: 0.5em;
+}
+.cs-text-image-text p {
+  opacity: 0.78;
+  margin-bottom: 1.4em;
+  line-height: 1.7;
+}
+.cs-text-image-img {
+  width: 100%;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  object-fit: cover;
+  aspect-ratio: 4 / 3;
+}
+@media (max-width: 820px) {
+  .cs-text-image {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+  .cs-img-left {
+    direction: ltr;
+  }
+  .cs-img-left .cs-text-image-img {
+    order: -1;
+  }
+}
+
+.cs-gallery {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1.2rem;
+}
+.cs-gallery img {
+  width: 100%;
+  aspect-ratio: 1;
+  object-fit: cover;
+  border-radius: 14px;
+  border: 1px solid var(--line);
 }
 
 /* ---------- Footer ---------- */

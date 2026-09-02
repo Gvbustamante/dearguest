@@ -14,14 +14,17 @@ import CTASection from "./components/CTASection.jsx";
 import ContactForm from "./components/ContactForm.jsx";
 import Footer from "./components/Footer.jsx";
 import FloatingWhatsApp from "./components/FloatingWhatsApp.jsx";
+import CustomSection from "./components/CustomSection.jsx";
+import { useSections } from "./hooks/useSections.js";
 
 export default function App() {
   const [mode, setMode] = useState("quince");
   const isBodas = mode === "bodas";
+  const customSections = useSections(mode);
 
   // Revela las secciones con .reveal a medida que entran en pantalla.
-  // Se vuelve a ejecutar al cambiar de modo porque el contenido de las
-  // secciones se reemplaza (nuevos nodos .reveal que aún no fueron observados).
+  // Se vuelve a ejecutar al cambiar de modo o al llegar secciones personalizadas
+  // (nuevos nodos .reveal que aún no fueron observados).
   useEffect(() => {
     const els = document.querySelectorAll(".reveal");
     if (!("IntersectionObserver" in window)) {
@@ -41,7 +44,7 @@ export default function App() {
     );
     els.forEach((el) => io.observe(el));
     return () => io.disconnect();
-  }, [mode]);
+  }, [mode, customSections.length]);
 
   return (
     <div id="top">
@@ -53,6 +56,10 @@ export default function App() {
         <Benefits mode={mode} />
         <div className="rule" />
         <HowItWorks mode={mode} />
+        {customSections.length > 0 && <div className="rule" />}
+        {customSections.map((s) => (
+          <CustomSection key={s.id} type={s.type} content={s.content} />
+        ))}
         <div className="rule" />
         {isBodas ? (
           <WeddingPricing />

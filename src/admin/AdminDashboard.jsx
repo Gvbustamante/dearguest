@@ -4,11 +4,13 @@ import { supabase } from "../lib/supabase.js";
 import AdminClients from "./AdminClients.jsx";
 import AdminMessages from "./AdminMessages.jsx";
 import AdminPlans from "./AdminPlans.jsx";
+import AdminSections from "./AdminSections.jsx";
 
 const TABS = [
   { id: "clients", label: "Clientes" },
   { id: "messages", label: "Mensajes" },
   { id: "plans", label: "Paquetes" },
+  { id: "sections", label: "Secciones" },
 ];
 
 export default function AdminDashboard() {
@@ -43,6 +45,7 @@ export default function AdminDashboard() {
         {tab === "clients" && <AdminClients />}
         {tab === "messages" && <AdminMessages />}
         {tab === "plans" && <AdminPlans />}
+        {tab === "sections" && <AdminSections />}
       </main>
     </div>
   );

@@ -286,3 +286,205 @@
 .admin-checkbox input {
   width: auto;
 }
+
+/* ---------- Secciones y fondos (constructor de secciones) ---------- */
+.admin-page-toggle {
+  display: flex;
+  gap: 2px;
+  background: var(--paper-soft);
+  border: 1px solid var(--line);
+  border-radius: 100px;
+  padding: 3px;
+}
+.admin-page-toggle button {
+  border: none;
+  background: none;
+  cursor: pointer;
+  font-family: "Poppins", sans-serif;
+  font-size: 0.82rem;
+  font-weight: 600;
+  padding: 0.5em 1.1em;
+  border-radius: 100px;
+  color: var(--ink-soft);
+  transition:
+    background 0.2s ease,
+    color 0.2s ease;
+}
+.admin-page-toggle button.active {
+  background: var(--olive);
+  color: var(--paper);
+}
+
+.admin-hero-bg {
+  background: var(--paper-soft);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  padding: 1.4rem 1.6rem;
+  margin-bottom: 1.8rem;
+}
+.admin-hero-bg h3,
+.admin-sections-head h3 {
+  font-family: "Playfair Display", serif;
+  font-size: 1.1rem;
+  margin: 0 0 0.9rem;
+}
+.admin-hero-bg-row {
+  display: flex;
+  align-items: center;
+  gap: 1.4rem;
+  flex-wrap: wrap;
+}
+.admin-hero-bg-preview {
+  width: 160px;
+  height: 90px;
+  border-radius: 10px;
+  object-fit: cover;
+  border: 1px solid var(--line);
+  flex: none;
+}
+.admin-hero-bg-empty {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  font-size: 0.76rem;
+  opacity: 0.55;
+  padding: 0.5rem;
+  background: var(--paper);
+}
+.admin-hero-bg-actions {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+.admin-upload-btn {
+  cursor: pointer;
+  display: inline-flex;
+  border: none;
+  font-size: 0.85rem;
+}
+
+.admin-sections-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+.admin-sections-head h3 {
+  margin: 0;
+}
+
+.admin-block-palette {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 0.8rem;
+  margin-bottom: 1.6rem;
+}
+.admin-block-option {
+  text-align: left;
+  background: var(--paper-soft);
+  border: 1.5px solid var(--line);
+  border-radius: 12px;
+  padding: 1rem 1.1rem;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  gap: 0.3em;
+  font-family: "Poppins", sans-serif;
+  transition: border-color 0.2s;
+}
+.admin-block-option:hover {
+  border-color: var(--olive);
+}
+.admin-block-option strong {
+  font-size: 0.92rem;
+}
+.admin-block-option span {
+  font-size: 0.78rem;
+  opacity: 0.65;
+  line-height: 1.4;
+}
+
+.admin-sections-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.9rem;
+}
+.admin-section-row {
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  background: var(--paper);
+  overflow: hidden;
+}
+.admin-section-row.hidden {
+  opacity: 0.6;
+}
+.admin-section-row-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 1rem;
+  padding: 1rem 1.2rem;
+}
+.admin-section-type {
+  display: block;
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  opacity: 0.55;
+  margin-bottom: 0.2em;
+}
+.admin-section-hidden-tag {
+  margin-left: 0.7em;
+  font-size: 0.7rem;
+  font-weight: 600;
+  color: var(--wine);
+}
+.admin-section-row-actions {
+  display: flex;
+  gap: 0.9rem;
+  flex-wrap: wrap;
+}
+.admin-section-form {
+  border-top: 1px solid var(--line);
+  padding: 1.2rem;
+  background: var(--paper-soft);
+}
+.admin-field-image-preview {
+  display: block;
+  max-width: 240px;
+  border-radius: 10px;
+  border: 1px solid var(--line);
+  margin-bottom: 0.7rem;
+}
+.admin-gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+  gap: 0.7rem;
+  margin-bottom: 0.8rem;
+}
+.admin-gallery-item {
+  position: relative;
+}
+.admin-gallery-item img {
+  width: 100%;
+  aspect-ratio: 1;
+  object-fit: cover;
+  border-radius: 8px;
+  border: 1px solid var(--line);
+}
+.admin-gallery-item button {
+  position: absolute;
+  inset: auto 4px 4px auto;
+  background: rgba(46, 27, 18, 0.75);
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  font-size: 0.68rem;
+  padding: 0.2em 0.5em;
+  cursor: pointer;
+}
