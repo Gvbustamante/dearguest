@@ -85,4 +85,28 @@ export function InstagramIcon(props) {
   );
 }
 
+export function StarIcon(props) {
+  return (
+    <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" {...props}>
+      <path d="M12 2.5l2.9 6.4 6.9.7-5.2 4.7 1.5 6.9L12 17.6l-6.1 3.6 1.5-6.9L2.2 9.6l6.9-.7Z" />
+    </svg>
+  );
+}
+
+export function ChevronIcon(props) {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" {...props}>
+      <path d="M6 9l6 6 6-6" />
+    </svg>
+  );
+}
+
+export function PlayIcon(props) {
+  return (
+    <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" {...props}>
+      <path d="M8 5v14l11-7Z" />
+    </svg>
+  );
+}
+
 export const ICONS = { heart: HeartIcon, phone: PhoneIcon, clock: ClockIcon, diamond: DiamondIcon };

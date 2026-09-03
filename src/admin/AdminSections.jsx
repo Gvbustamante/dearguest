@@ -13,6 +13,81 @@ const FIELD_LABELS = {
   eyebrow: "Etiqueta pequeña",
   buttonLabel: "Texto del botón",
   buttonHref: "Enlace del botón (ej. #paquetes o https://...)",
+  beforeImage: "Imagen izquierda (antes)",
+  beforeLabel: "Etiqueta de la imagen izquierda",
+  afterImage: "Imagen derecha (después)",
+  afterLabel: "Etiqueta de la imagen derecha",
+  message: "Mensaje",
+  videoUrl: "URL del video (YouTube, Vimeo o .mp4)",
+  testimonials: "Testimonios",
+  badges: "Insignias",
+  stats: "Estadísticas",
+  logos: "Logos",
+  members: "Equipo",
+  faqItems: "Preguntas frecuentes",
+  cards: "Tarjetas",
+};
+
+// Campos de imagen simples (no repetibles) que usan el mismo botón de subir imagen.
+const IMAGE_FIELDS = ["imageUrl", "beforeImage", "afterImage"];
+
+// Listas de objetos: cada clave define las sub-preguntas del formulario repetible.
+const REPEATER_SPECS = {
+  testimonials: {
+    itemLabel: "Testimonio",
+    subfields: [
+      { key: "photo", label: "Foto", type: "image" },
+      { key: "quote", label: "Cita", type: "textarea" },
+      { key: "name", label: "Nombre", type: "text" },
+      { key: "event", label: "Evento", type: "text" },
+      { key: "rating", label: "Estrellas (1 a 5)", type: "number" },
+    ],
+  },
+  badges: {
+    itemLabel: "Insignia",
+    subfields: [
+      { key: "imageUrl", label: "Imagen", type: "image" },
+      { key: "label", label: "Texto", type: "text" },
+    ],
+  },
+  stats: {
+    itemLabel: "Estadística",
+    subfields: [
+      { key: "number", label: "Número (ej. 500+)", type: "text" },
+      { key: "label", label: "Etiqueta", type: "text" },
+    ],
+  },
+  logos: {
+    itemLabel: "Logo",
+    subfields: [
+      { key: "imageUrl", label: "Imagen", type: "image" },
+      { key: "name", label: "Nombre", type: "text" },
+    ],
+  },
+  members: {
+    itemLabel: "Persona",
+    subfields: [
+      { key: "photo", label: "Foto", type: "image" },
+      { key: "name", label: "Nombre", type: "text" },
+      { key: "role", label: "Rol", type: "text" },
+      { key: "bio", label: "Bio corta", type: "text" },
+    ],
+  },
+  faqItems: {
+    itemLabel: "Pregunta",
+    subfields: [
+      { key: "question", label: "Pregunta", type: "text" },
+      { key: "answer", label: "Respuesta", type: "textarea" },
+    ],
+  },
+  cards: {
+    itemLabel: "Tarjeta",
+    subfields: [
+      { key: "imageUrl", label: "Imagen", type: "image" },
+      { key: "title", label: "Título", type: "text" },
+      { key: "body", label: "Texto", type: "text" },
+    ],
+  },
 };
 
 async function uploadImage(file) {
@@ -168,6 +243,20 @@ export default function AdminSections() {
     updateContent(section.id, "images", images);
   }
 
+  // Sube una imagen para un elemento dentro de una lista repetible (ej. la foto
+  // de un testimonio o el logo #3 de la barra de logos).
+  async function uploadRepeaterImage(section, field, index, key, file) {
+    setError("");
+    try {
+      const url = await uploadImage(file);
+      const list = Array.isArray(section.content[field]) ? section.content[field] : [];
+      const next = list.map((item, i) => (i === index ? { ...item, [key]: url } : item));
+      updateContent(section.id, field, next);
+    } catch {
+      setError("No se pudo subir la imagen. Intenta de nuevo.");
+    }
+  }
+
   const ordered = sections ? [...sections].sort((a, b) => a.position - b.position) : null;
 
   return (
@@ -285,6 +374,7 @@ export default function AdminSections() {
                       onUploadImage={(file) => uploadFieldImage(section, field, file)}
                       onAddGalleryImage={(file) => addGalleryImage(section, file)}
                       onRemoveGalleryImage={(url) => removeGalleryImage(section, url)}
+                      onUploadItemImage={(index, key, file) => uploadRepeaterImage(section, field, index, key, file)}
                     />
                   ))}
                   <button type="button" className="btn btn-primary" onClick={() => saveSection(section)}>
@@ -300,13 +390,25 @@ export default function AdminSections() {
   );
 }
 
-function SectionField({ field, section, onChange, onUploadImage, onAddGalleryImage, onRemoveGalleryImage }) {
+function SectionField({ field, section, onChange, onUploadImage, onAddGalleryImage, onRemoveGalleryImage, onUploadItemImage }) {
   const value = section.content[field];
 
-  if (field === "imageUrl") {
+  if (REPEATER_SPECS[field]) {
+    return (
+      <RepeaterField
+        field={field}
+        spec={REPEATER_SPECS[field]}
+        list={Array.isArray(value) ? value : []}
+        onChange={onChange}
+        onUploadItemImage={onUploadItemImage}
+      />
+    );
+  }
+
+  if (IMAGE_FIELDS.includes(field)) {
     return (
       <div className="cf-field">
-        <label>Imagen</label>
+        <label>{FIELD_LABELS[field] || "Imagen"}</label>
         {value && <img src={value} alt="" className="admin-field-image-preview" />}
         <label className="btn btn-ghost admin-upload-btn">
           {value ? "Cambiar imagen" : "Subir imagen"}
@@ -365,6 +467,97 @@ function SectionField({ field, section, onChange, onUploadImage, onAddGalleryIma
   return (
     <div className="cf-field">
       <label>{FIELD_LABELS[field] || field}</label>
+      <input value={value || ""} onChange={(e) => onChange(e.target.value)} />
+    </div>
+  );
+}
+
+// Formulario repetible genérico: agrega/edita/quita elementos de una lista
+// (testimonios, insignias, estadísticas, logos, equipo, preguntas, tarjetas...)
+// según la especificación de sub-campos de REPEATER_SPECS.
+function RepeaterField({ field, spec, list, onChange, onUploadItemImage }) {
+  function updateItem(index, key, value) {
+    onChange(list.map((item, i) => (i === index ? { ...item, [key]: value } : item)));
+  }
+
+  function addItem() {
+    const blank = {};
+    spec.subfields.forEach((sf) => {
+      blank[sf.key] = "";
+    });
+    onChange([...list, blank]);
+  }
+
+  function removeItem(index) {
+    onChange(list.filter((_, i) => i !== index));
+  }
+
+  return (
+    <div className="cf-field admin-repeater">
+      <label>{FIELD_LABELS[field] || spec.itemLabel}</label>
+      {list.map((item, index) => (
+        <div className="admin-repeater-item" key={index}>
+          <div className="admin-repeater-item-head">
+            <span>
+              {spec.itemLabel} {index + 1}
+            </span>
+            <button type="button" className="admin-link-btn" onClick={() => removeItem(index)}>
+              Quitar
+            </button>
+          </div>
+          {spec.subfields.map((sf) => (
+            <RepeaterSubfield
+              key={sf.key}
+              subfield={sf}
+              value={item[sf.key]}
+              onChange={(v) => updateItem(index, sf.key, v)}
+              onUploadImage={(file) => onUploadItemImage(index, sf.key, file)}
+            />
+          ))}
+        </div>
+      ))}
+      <button type="button" className="btn btn-ghost admin-upload-btn" onClick={addItem}>
+        + Agregar {spec.itemLabel.toLowerCase()}
+      </button>
+    </div>
+  );
+}
+
+function RepeaterSubfield({ subfield, value, onChange, onUploadImage }) {
+  if (subfield.type === "image") {
+    return (
+      <div className="cf-field admin-repeater-subfield">
+        <label>{subfield.label}</label>
+        {value && <img src={value} alt="" className="admin-field-image-preview admin-field-image-preview-sm" />}
+        <label className="btn btn-ghost admin-upload-btn">
+          {value ? "Cambiar imagen" : "Subir imagen"}
+          <input type="file" accept="image/*" hidden onChange={(e) => e.target.files?.[0] && onUploadImage(e.target.files[0])} />
+        </label>
+      </div>
+    );
+  }
+
+  if (subfield.type === "textarea") {
+    return (
+      <div className="cf-field admin-repeater-subfield">
+        <label>{subfield.label}</label>
+        <textarea value={value || ""} onChange={(e) => onChange(e.target.value)} />
+      </div>
+    );
+  }
+
+  if (subfield.type === "number") {
+    return (
+      <div className="cf-field admin-repeater-subfield">
+        <label>{subfield.label}</label>
+        <input type="number" min="1" max="5" value={value || ""} onChange={(e) => onChange(e.target.value)} />
+      </div>
+    );
+  }
+
+  return (
+    <div className="cf-field admin-repeater-subfield">
+      <label>{subfield.label}</label>
       <input value={value || ""} onChange={(e) => onChange(e.target.value)} />
     </div>
   );

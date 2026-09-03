@@ -524,3 +524,36 @@
   padding: 0.2em 0.5em;
   cursor: pointer;
 }
+
+.admin-repeater {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+}
+.admin-repeater-item {
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 0.9rem 1rem 0.4rem;
+  background: var(--paper);
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+.admin-repeater-item-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0.4rem;
+}
+.admin-repeater-item-head span {
+  font-size: 0.76rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  opacity: 0.55;
+}
+.admin-repeater-subfield {
+  margin-bottom: 0.6rem;
+}
+.admin-field-image-preview-sm {
+  max-width: 120px;
+}
