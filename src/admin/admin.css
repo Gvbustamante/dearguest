@@ -33,7 +33,7 @@
   margin: 0 auto 0.8em;
 }
 .admin-login-card h1 {
-  font-family: "Playfair Display", serif;
+  font-family: "Montserrat", sans-serif;
   font-size: 1.5rem;
   margin-bottom: 0.4em;
 }
@@ -128,7 +128,7 @@
   margin-bottom: 1.4rem;
 }
 .admin-panel-head h2 {
-  font-family: "Playfair Display", serif;
+  font-family: "Montserrat", sans-serif;
   font-size: 1.4rem;
   display: flex;
   align-items: center;
@@ -345,7 +345,7 @@
   margin-bottom: 2.2rem;
 }
 .admin-currency-group h3 {
-  font-family: "Playfair Display", serif;
+  font-family: "Montserrat", sans-serif;
   font-size: 1rem;
   margin: 0 0 0.9rem;
   opacity: 0.75;
@@ -360,7 +360,7 @@
 }
 .admin-hero-bg h3,
 .admin-sections-head h3 {
-  font-family: "Playfair Display", serif;
+  font-family: "Montserrat", sans-serif;
   font-size: 1.1rem;
   margin: 0 0 0.9rem;
 }
@@ -522,5 +522,78 @@
   border-radius: 6px;
   font-size: 0.68rem;
   padding: 0.2em 0.5em;
+  cursor: pointer;
+}
+
+.admin-repeater {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+}
+.admin-repeater-item {
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 0.9rem 1rem 0.4rem;
+  background: var(--paper);
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+.admin-repeater-item-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0.4rem;
+}
+.admin-repeater-item-head span {
+  font-size: 0.76rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  opacity: 0.55;
+}
+.admin-repeater-subfield {
+  margin-bottom: 0.6rem;
+}
+.admin-field-image-preview-sm {
+  max-width: 120px;
+}
+
+.admin-style-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  gap: 1.6rem;
+  margin: 0.4rem 0 1.2rem;
+  padding-top: 1rem;
+  border-top: 1px dashed var(--line);
+}
+.admin-color-field {
+  margin: 0;
+}
+.admin-color-row {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+}
+.admin-color-row input[type="color"] {
+  width: 42px;
+  height: 34px;
+  padding: 2px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  cursor: pointer;
+  background: none;
+}
+.admin-checkbox-field {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.88rem;
+  cursor: pointer;
+  padding-bottom: 0.4rem;
+}
+.admin-checkbox-field input {
+  width: 16px;
+  height: 16px;
   cursor: pointer;
 }

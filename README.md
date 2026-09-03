@@ -6,7 +6,7 @@ quinceañeras (sitios personalizados con fotos, música, RSVP y código QR).
 Construido con **React + Vite**, en componentes reutilizables y con la
 identidad de marca oficial:
 
-- **Tipografía:** Playfair Display (títulos) + Poppins (cuerpo/UI)
+- **Tipografía:** Montserrat (títulos) + Poppins (cuerpo/UI)
 - **Colores:** Borgoña `#6E1E33` · Verde Oliva `#6B7A3A` · Marfil `#FFFFF2` · Chocolate `#2E1B12`
 - **Modo oscuro** incluido (tokens en `src/index.css`)
 
