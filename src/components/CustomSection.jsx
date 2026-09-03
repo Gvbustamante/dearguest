@@ -24,6 +24,17 @@ function toEmbedUrl(url) {
   return null;
 }
 
+// Todas las plantillas admiten el mismo par de ajustes desde /admin > Secciones:
+// un color de texto propio y una sombra sutil (tarjeta elevada) alrededor del
+// contenido. wrapClass agrega la clase que dibuja esa tarjeta; wrapStyle aplica
+// el color, que se hereda a los títulos y textos de adentro.
+function wrapClass(base, c) {
+  return `${base}${c.softShadow ? " cs-elevated" : ""}`;
+}
+function wrapStyle(c) {
+  return c.textColor ? { color: c.textColor } : undefined;
+}
+
 export default function CustomSection({ type, content }) {
   const c = content || {};
   // Solo se usa en type === "faq", pero los hooks siempre se llaman en el mismo orden.
@@ -33,7 +44,7 @@ export default function CustomSection({ type, content }) {
     return (
       <section className="cs-hero" style={c.imageUrl ? { backgroundImage: `url(${c.imageUrl})` } : undefined}>
         <div className="cs-hero-overlay" aria-hidden="true" />
-        <div className="container cs-hero-inner reveal">
+        <div className={wrapClass("container cs-hero-inner reveal", c)} style={wrapStyle(c)}>
           {c.title && <h2>{c.title}</h2>}
           {c.subtitle && <p>{c.subtitle}</p>}
           {c.buttonLabel && c.buttonHref && (
@@ -49,7 +60,10 @@ export default function CustomSection({ type, content }) {
   if (type === "text_image") {
     return (
       <section>
-        <div className={`container cs-text-image reveal${c.imagePosition === "left" ? " cs-img-left" : ""}`}>
+        <div
+          className={wrapClass(`container cs-text-image reveal${c.imagePosition === "left" ? " cs-img-left" : ""}`, c)}
+          style={wrapStyle(c)}
+        >
           <div className="cs-text-image-text">
             {c.title && <h2>{c.title}</h2>}
             {c.body && <p>{c.body}</p>}
@@ -68,7 +82,7 @@ export default function CustomSection({ type, content }) {
   if (type === "text_block") {
     return (
       <section>
-        <div className="container">
+        <div className={wrapClass("container", c)} style={wrapStyle(c)}>
           <div className="section-head reveal">
             {c.eyebrow && <span className="eyebrow">{c.eyebrow}</span>}
             {c.title && <h2>{c.title}</h2>}
@@ -84,7 +98,7 @@ export default function CustomSection({ type, content }) {
     if (!images.length) return null;
     return (
       <section>
-        <div className="container">
+        <div className={wrapClass("container", c)} style={wrapStyle(c)}>
           {c.title && (
             <div className="section-head reveal">
               <h2>{c.title}</h2>
@@ -104,7 +118,7 @@ export default function CustomSection({ type, content }) {
     return (
       <section className="cta">
         <div className="container">
-          <div className="cta-inner reveal">
+          <div className={wrapClass("cta-inner reveal", c)} style={wrapStyle(c)}>
             {c.title && <h2>{c.title}</h2>}
             {c.body && <p>{c.body}</p>}
             {c.buttonLabel && c.buttonHref && (
@@ -123,7 +137,7 @@ export default function CustomSection({ type, content }) {
     if (!items.length) return null;
     return (
       <section>
-        <div className="container">
+        <div className={wrapClass("container", c)} style={wrapStyle(c)}>
           {c.title && (
             <div className="section-head reveal">
               <h2>{c.title}</h2>
@@ -154,7 +168,7 @@ export default function CustomSection({ type, content }) {
     if (!badges.length) return null;
     return (
       <section>
-        <div className="container">
+        <div className={wrapClass("container", c)} style={wrapStyle(c)}>
           <div className="cs-badges-head reveal">
             {c.title && <h2>{c.title}</h2>}
             {c.body && <p>{c.body}</p>}
@@ -177,7 +191,7 @@ export default function CustomSection({ type, content }) {
     if (!stats.length) return null;
     return (
       <section>
-        <div className="container">
+        <div className={wrapClass("container", c)} style={wrapStyle(c)}>
           {c.title && (
             <div className="section-head reveal">
               <h2>{c.title}</h2>
@@ -201,7 +215,7 @@ export default function CustomSection({ type, content }) {
     if (!logos.length) return null;
     return (
       <section>
-        <div className="container">
+        <div className={wrapClass("container", c)} style={wrapStyle(c)}>
           {c.title && (
             <div className="section-head reveal">
               <h2>{c.title}</h2>
@@ -224,7 +238,7 @@ export default function CustomSection({ type, content }) {
     if (!members.length) return null;
     return (
       <section>
-        <div className="container">
+        <div className={wrapClass("container", c)} style={wrapStyle(c)}>
           {c.title && (
             <div className="section-head reveal">
               <h2>{c.title}</h2>
@@ -249,7 +263,7 @@ export default function CustomSection({ type, content }) {
     if (!c.beforeImage && !c.afterImage) return null;
     return (
       <section>
-        <div className="container">
+        <div className={wrapClass("container", c)} style={wrapStyle(c)}>
           {c.title && (
             <div className="section-head reveal">
               <h2>{c.title}</h2>
@@ -275,7 +289,7 @@ export default function CustomSection({ type, content }) {
     if (!items.length) return null;
     return (
       <section>
-        <div className="container">
+        <div className={wrapClass("container", c)} style={wrapStyle(c)}>
           {c.title && (
             <div className="section-head reveal">
               <h2>{c.title}</h2>
@@ -306,7 +320,7 @@ export default function CustomSection({ type, content }) {
     const embed = !isFile ? toEmbedUrl(c.videoUrl) : null;
     return (
       <section>
-        <div className="container">
+        <div className={wrapClass("container", c)} style={wrapStyle(c)}>
           {c.title && (
             <div className="section-head reveal">
               <h2>{c.title}</h2>
@@ -339,7 +353,7 @@ export default function CustomSection({ type, content }) {
     if (!c.message) return null;
     return (
       <section className="cs-urgency">
-        <div className="container cs-urgency-inner reveal">
+        <div className={wrapClass("container cs-urgency-inner reveal", c)} style={wrapStyle(c)}>
           <span>{c.message}</span>
           {c.buttonLabel && c.buttonHref && (
             <a className="btn btn-primary" href={c.buttonHref}>
@@ -356,7 +370,7 @@ export default function CustomSection({ type, content }) {
     if (!cards.length) return null;
     return (
       <section>
-        <div className="container">
+        <div className={wrapClass("container", c)} style={wrapStyle(c)}>
           {c.title && (
             <div className="section-head reveal">
               <h2>{c.title}</h2>

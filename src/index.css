@@ -103,7 +103,7 @@ a {
 h1,
 h2,
 h3 {
-  font-family: "Playfair Display", Georgia, serif;
+  font-family: "Montserrat", sans-serif;
   font-weight: 600;
   line-height: 1.12;
   margin: 0;
@@ -236,7 +236,7 @@ nav {
   transform: rotate(90deg);
 }
 .brand-name {
-  font-family: "Playfair Display", serif;
+  font-family: "Montserrat", sans-serif;
   font-weight: 600;
   font-size: 1.18rem;
   letter-spacing: 0.01em;
@@ -496,7 +496,7 @@ nav {
   border-radius: 50%;
   background: var(--olive);
   color: var(--paper);
-  font-family: "Playfair Display", serif;
+  font-family: "Montserrat", sans-serif;
   font-weight: 600;
   font-size: 1.5rem;
   display: flex;
@@ -528,7 +528,7 @@ nav {
   height: 24px;
 }
 .invite-name {
-  font-family: "Playfair Display", serif;
+  font-family: "Montserrat", sans-serif;
   font-style: italic;
   font-weight: 600;
   font-size: 1.55rem;
@@ -786,7 +786,7 @@ section {
   border-radius: 50%;
   background: var(--olive);
   color: var(--paper);
-  font-family: "Playfair Display", serif;
+  font-family: "Montserrat", sans-serif;
   font-weight: 600;
   font-style: italic;
   font-size: 0.98rem;
@@ -888,7 +888,7 @@ section {
   color: var(--paper);
 }
 .plan-name {
-  font-family: "Playfair Display", serif;
+  font-family: "Montserrat", sans-serif;
   font-style: italic;
   font-size: 1.5rem;
   font-weight: 600;
@@ -1014,7 +1014,7 @@ section {
   text-align: center;
 }
 .trust-n {
-  font-family: "Playfair Display", serif;
+  font-family: "Montserrat", sans-serif;
   font-weight: 700;
   font-size: 1.5rem;
   color: var(--olive);
@@ -1315,7 +1315,7 @@ section {
   margin-bottom: 0.4em;
 }
 .calc-result-price {
-  font-family: "Playfair Display", serif;
+  font-family: "Montserrat", sans-serif;
   font-size: 2.4rem;
   font-weight: 700;
   color: var(--olive);
@@ -1394,7 +1394,7 @@ section {
   text-align: center;
 }
 .cf-msg-ok strong {
-  font-family: "Playfair Display", serif;
+  font-family: "Montserrat", sans-serif;
   font-style: italic;
   font-size: 1.3rem;
   color: var(--olive);
@@ -1842,7 +1842,7 @@ section {
   text-align: center;
 }
 .cs-stat-n {
-  font-family: "Playfair Display", serif;
+  font-family: "Montserrat", sans-serif;
   font-weight: 700;
   font-size: clamp(1.8rem, 3vw, 2.4rem);
   color: var(--olive);
@@ -1869,7 +1869,7 @@ section {
   filter: grayscale(1);
 }
 .cs-logo span {
-  font-family: "Playfair Display", serif;
+  font-family: "Montserrat", sans-serif;
   font-style: italic;
   opacity: 0.6;
 }
@@ -2061,6 +2061,19 @@ section {
   opacity: 0.72;
 }
 
+/* ---------- Color de texto + sombra sutil (opcional, cualquier sección) ---------- */
+.cs-elevated {
+  background: var(--paper-soft);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 2.6rem 2.4rem;
+}
+@media (max-width: 560px) {
+  .cs-elevated {
+    padding: 2rem 1.4rem;
+  }
+}
+
 /* ---------- Más experiencias (bautizo, cumpleaños, renovación) ---------- */
 .other-exp-groups {
   display: flex;
@@ -2068,7 +2081,7 @@ section {
   gap: 3.4rem;
 }
 .other-exp-group h3 {
-  font-family: "Playfair Display", serif;
+  font-family: "Montserrat", sans-serif;
   font-style: italic;
   font-size: 1.3rem;
   text-align: center;

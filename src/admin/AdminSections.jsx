@@ -377,6 +377,33 @@ export default function AdminSections() {
                       onUploadItemImage={(index, key, file) => uploadRepeaterImage(section, field, index, key, file)}
                     />
                   ))}
+
+                  <div className="admin-style-row">
+                    <div className="cf-field admin-color-field">
+                      <label>Color del texto</label>
+                      <div className="admin-color-row">
+                        <input
+                          type="color"
+                          value={section.content.textColor || "#2e1b12"}
+                          onChange={(e) => updateContent(section.id, "textColor", e.target.value)}
+                        />
+                        {section.content.textColor && (
+                          <button type="button" className="admin-link-btn" onClick={() => updateContent(section.id, "textColor", "")}>
+                            Usar el color por defecto
+                          </button>
+                        )}
+                      </div>
+                    </div>
+                    <label className="admin-checkbox-field">
+                      <input
+                        type="checkbox"
+                        checked={!!section.content.softShadow}
+                        onChange={(e) => updateContent(section.id, "softShadow", e.target.checked)}
+                      />
+                      Sombra sutil
+                    </label>
+                  </div>
+
                   <button type="button" className="btn btn-primary" onClick={() => saveSection(section)}>
                     Guardar cambios
                   </button>
